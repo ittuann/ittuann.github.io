@@ -16,8 +16,8 @@
 
 ## => Site Settings
 ##############################
-text_skin: default # "default" (default), "dark", "forest", "ocean", "chocolate", "orange"
-highlight_theme: default # "default" (default), "tomorrow", "tomorrow-night", "tomorrow-night-eighties", "tomorrow-night-blue", "tomorrow-night-bright"
+text_skin: chocolate # "default" (default), "dark", "forest", "ocean", "chocolate", "orange"
+highlight_theme: tomorrow-night # "default" (default), "tomorrow", "tomorrow-night", "tomorrow-night-eighties", "tomorrow-night-blue", "tomorrow-night-bright"
 url     : # the base hostname & protocol for your site e.g. https://www.someone.com
 baseurl : # does not include hostname
 title   : ittuann
@@ -36,8 +36,8 @@ timezone: Asia/Shanghai # see https://en.wikipedia.org/wiki/List_of_tz_database_
 author:
   type      : person # "person" (default), "organization"
   name      : ittuann
-  url       :
-  avatar    : # path or url of avatar image (square)
+  url       : ittuann.github.io
+  avatar    : https://i.loli.net/2021/08/28/DAosSp3YWcgmvrl.jpg # path or url of avatar image (square)
   bio       : A third-rate modern magician.
   email     : ittuann@outlook.com
   facebook  : # "user_name" the last part of your profile url, e.g. https://www.facebook.com/user_name
@@ -55,7 +55,7 @@ author:
 
 ## => GitHub Repository (if the site is hosted by GitHub)
 ##############################
-repository: user_name/repo_name
+repository: ittuann/ittuann.github.io
 repository_tree: master
 
 
@@ -108,7 +108,7 @@ sources: # bootcdn (default), unpkg
 ## => Sharing
 ##############################
 sharing:
-  provider: false # false (default), "addtoany", "addthis", "custom"
+  provider: addtoany # false (default), "addtoany", "addthis", "custom"
 
   ## AddThis
   addthis:
