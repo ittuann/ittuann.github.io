@@ -2,7 +2,7 @@ header:
   - titles :
       en      : &EN       Home
       zh      : &zh       主页
-    url       : /test/
+    url       : /index.html
 
   - titles:
       # @start locale config
