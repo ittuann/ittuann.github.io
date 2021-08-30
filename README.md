@@ -1,1 +1,1 @@
-基于 github homepage 的博客
+Blog based on github homepage.

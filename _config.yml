@@ -37,7 +37,7 @@ author:
   type      : person # "person" (default), "organization"
   name      : ittuann
   url       : ittuann.github.io
-  avatar    : /avatar.png # path or url of avatar image (square)
+  avatar    : /assets/avatar.png # path or url of avatar image (square)
   bio       : A third-rate modern magician.
   email     : ittuann@outlook.com
   facebook  : # "user_name" the last part of your profile url, e.g. https://www.facebook.com/user_name
@@ -127,6 +127,7 @@ comments:
   ## Gitalk
   # please refer to https://github.com/gitalk/gitalk for more info.
   gitalk:
+    proxy       : 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token' # Error 403
     clientID    : fdf375586f14b4eb6297 # GitHub Application Client ID
     clientSecret: 166145c42e4a3315ceb442e0e4ca660a4b7e656c # GitHub Application Client Secret
     repository  : ittuann.github.io # GitHub repo
