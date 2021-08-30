@@ -38,23 +38,23 @@ aside:
 判断图像上半部分中线与赛道两边界无交点即可加速。
 
 ```c
-for (i = startrow; i < endrow; i++) {
-    if ((endrow - startrow) < 5) {
+for (i = startRow; i < endRow; i++) {
+    if ((endRow - startRow) < 5) {
         break;
     }   //行数过少取消判断
     
-	if (middle_standard - left_black[i] > 4 && right_black[i] - middle_standard > 4) {
-        RowCount2++;
-    } else if (middle_standard - left_black[i] > 2 && right_black[i] - middle_standard > 2) {
-        RowCount++;
+	if (middleStandard - leftBlack[i] > 4 && rightBlack[i] - middleStandard > 4) {
+        rowCount2++;
+    } else if (middleStandard - leftBlack[i] > 2 && rightBlack[i] - middleStandard > 2) {
+        rowCount++;
     } else {
         break;
     }
 
-    if (RowCount == endrow - startrow) {
-            Gear = 8;
+    if (rowCount == endRow - startRow) {
+		Gear = 8;
     }
-    if (RowCount2 == endrow - startrow) {
+    if (rowCount2 == endRow - startRow) {
         Gear = 10;
     }
 }   //判断中线上半部与赛道两边界无焦点即可加速
@@ -69,9 +69,9 @@ for (i = startrow; i < endrow; i++) {
 分别计算speed_line为20, 25, 30这三行的误差，并取最大值用于判断加速。
 
 ```c
-speedline_err_real = (ABS)(( 5 * middle_line[speed_line] +
-                             2 * middle_line[speed_line + 1] +
-                             3 * middle_line[speed_line - 1]) / (10) - middle_standard);
+speedLineErr = (ABS)(( 	5 * middleLine[speedLine] +
+						2 * middleLine[speedLine + 1] +
+                      	3 * middleLine[speedLine - 1]) / (10) - middleStandard);
 ```
 
 ## 有效行判断加速：
@@ -83,15 +83,15 @@ speedline_err_real = (ABS)(( 5 * middle_line[speed_line] +
 实际走过一定距离的直道, 就算是直道。有些时候小s不会判断加速，这时只是用车身姿态来判断，可以解决这些正常判断较为难以处理的情况。注意这样加有滞后性, 加速量不要给多。
 
 ```c
-if (ABS((int16)(fabsf(CarSpeed_a))) < SpeedZone) {
-    Dis_Acc_Count ++;
+if (ABS((int16)(fabsf(carSpeedA))) < speedZone) {
+    disAccCount ++;
 } else {
-	Dis_Acc_Count = 0;
+	disAccCount = 0;
 }
 
-if (Dis_Acc_Count >= 500)	Dis_Acc_Count = 500;	//限幅
+if (disAccCount >= 500)	disAccCount = 500;	//限幅
 
-if (Dis_Acc_Count > CountZone) {
+if (disAccCount > countZone) {
 	Gear = 3;
 }
 ```

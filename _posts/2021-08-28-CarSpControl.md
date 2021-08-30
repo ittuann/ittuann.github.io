@@ -13,23 +13,23 @@ aside:
 
 * 麦轮的安装：麦轮一般是四个一组使用，两个左旋轮，两个右旋轮。左旋轮和右旋轮呈手性对称。常用的有两种安装方式，分为O型和X型，其中X和O表示的是与四个轮子地面接触的辊子所形成的图形。又可以根据四个轮子与地面接触点所围成的形状分为正方形与长方形。传动力矩的长度上O型大于X长方形，且X正方形轮子转动产生的力矩会经过同一个点，yaw 轴无法主动旋转和保持角度，因此一般安装时采用O型。科宇的车模为正方形，四个轮子上滚轮的转动轴汇聚于底板中心，我们也选择了O型来安装。
 
-  <img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarSpControl1.jpg" alt="img" style="zoom: 25%;" />****
+  <img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarSpControl1.jpg" alt="img" style="zoom:20%;" />
 
 * 安装后通过速度分解，将底盘的运动期望解算至电机转速，分别控制四个轮子的转速，即可实现3个独立自由度上的运动运动。麦克纳姆轮驱动的H车属与于Holonomic，它的控制自由度等于整体自由度，因为它可以在平面坐标系内沿任意方向移动。小车可以由 2个平面移动自由度和 1个转动自由度分别控制。 2个平面自由度控制小车的位置， 1个转动自由度控制小车的姿态。所以小车所有的运行状况都可以用这三种情况耦合而成。
 
   <img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarSpControl5.png" alt="img" style="zoom:50%;" />
 
-  麦轮的运动模型推算过程略过，可以阅读参考文献[1]，这里直接给出结论
+  麦轮的运动模型推算过程略过，可以阅读参考资料，这里直接给出结论
 
-  <img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarSpControl2.jpg" alt="img" style="zoom:25%;" />
+  <img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarSpControl2.jpg" alt="img" style="zoom:50%;" />
 
   可以解算出四个轮子的转速为
 
-  <img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarSpControl3.png" alt="img" style="zoom:25%;" />
+  <img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarSpControl3.png" alt="img" style="zoom:50%;" />
 
   同理，根据逆运动学模型中的三个方程逆向运算可解得，正运动学模型方程组为
 
-  <img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarSpControl4.png" alt="img" style="zoom:25%;" />
+  <img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarSpControl4.png" alt="img" style="zoom:50%;" />
 
 # 常规控制方案
 
