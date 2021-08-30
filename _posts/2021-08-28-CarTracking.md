@@ -18,9 +18,9 @@ aside:
 aim_line取决于速度和有效行，速度越快aim_line预瞄距离越远，同时限幅在有效行之下。
 
 ```c
-AngleErr = ((	5 * middle_line[aim_line] +
-				3 * middle_line[aim_line + 1] +
-				2 * middle_line[aim_line + 2]) / (10.000f)) - middle_standard;
+AngleErr = ((	5 * middleLine[aimLine] +
+				3 * middleLine[aimLine + 1] +
+				2 * middleLine[aimLine + 2]) / (10.000f)) - middleStandard;
 ```
 
 ### 加权计算全图像：
@@ -40,69 +40,69 @@ uint8   weight1[60] = {						//0为图像最顶行
         10,10,10,10,10, 5, 5, 5, 5, 5,
          3, 3, 3, 1, 1, 1, 0, 0, 0, 0,};    //基础    //注意斜率变化引起的跳变,要平滑
 
-for(i = start_row; i > valid_row + 1; i --) {
-    weight_sum += weight1[i];
-    line_sum += weight1[i] * middle_line[i];
+for(i = startRow; i > validRow + 1; i --) {
+    weightSum += weight1[i];
+    lineSum += weight1[i] * middleLine[i];
 }   //从下往上扫
 
-midlinenow  = (float)line_sum / weight_sum - middle_standard;
+midlineNow  = (float)lineSum / weightSum - middleStandard;
 midline_fff = midline_ff;
 midline_ff  = midline_f;
-midline_f   = midlinenow;
-AngleErr = midline_fff * 0.50f + midline_ff * 0.30f + midline_f * 0.20f;
+midline_f   = midlineNow;
+angleErr = midline_fff * 0.50f + midline_ff * 0.30f + midline_f * 0.20f;
 ```
 
 在这些的基础上增加了最小二乘法对摄像头中线的再拟合，作用也是为了更为了使循迹平滑。
 
 ```   c
-Slope = Regression_cal(valid_row + 3, start_row); 
-AngleErr = AngleErr * 0.80f + Slope * 0.20f;
+slope = RegressionCal(validRow + 3, startRow); 
+angleErr = angleErr * 0.80f + slope * 0.20f;
 ```
 
 ### 用部分图像计算偏差：
 
 ```c
-memset(Part_Err, 0, sizeof(Part_Err));
-Improper_Row_Count = 0;
-memset(Improper_Row, 0, sizeof(Improper_Row));
+memset(partErr, 0, sizeof(partErr));
+improperRowCount = 0;
+memset(improperrow, 0, sizeof(improperRow));
 
-if (Start_Part > start_row)	Start_Part = start_row - 2;	//起始行限幅
-End_Part = Start_Part - PartUsed;
-if (End_Part < valid_row)	End_Part = valid_row + 2;	//截至行限幅
+if (startPart > startRow)	startPart = startRow - 2;	//起始行限幅
+endPart = startPart - partUsed;
+if (endPart < validRow)	endPart = validRow + 2;	//截至行限幅
 
-for (i = Start_Part; i > End_Part; i--) {	//从下往上扫
-    Part_Err[Start_Part - i] = (float)(middle_line[i] - middle_standard) * 100.0f / ((float)img_real_width[i] / 2.0f);
-    Part_Ave += middle_line[i];
-//        if (i == End_Part - 2) {
-//            Part_Err[Start_Part - i] = Part_Err[Start_Part - i] * 1.20f;
+for (i = startPart; i > endPart; i--) {	//从下往上扫
+    partErr[startPart - i] = (float)(middleLine[i] - middleStandard) * 100.0f / ((float)imgRealWidth[i] / 2.0f);
+    partAve += middleLine[i];
+//        if (i == endPart - 2) {
+//            Part_Err[startPart - i] = partErr[startPart - i] * 1.20f;
 //        }   //放大截至行误差
 }	//相当于逆透视
-	//PartUsed 相当于前瞻, 10行适合低速, 高速可以取15, 区域越小越灵敏
+	//partUsed 相当于前瞻, 10行适合低速, 高速可以取15, 区域越小越灵敏
 
-Part_Ave = Part_Ave / Part_Used;			//计算范围内中线平均值
-for (i = Start_Part; i > End_Part; i--) {
-    if (ABS(middle_line[i] - Part_Ave) > 10) {
-        Improper_Row[Start_Part - i] = middle_line[i];
-        Part_Used--;
-        Improper_Row_Count++;
+partAve = partAve / partUsed;			//计算范围内中线平均值
+for (i = startPart; i > endPart; i--) {
+    if (ABS(middleLine[i] - partAve) > 10) {
+        improperRow[startPart - i] = middleLine[i];
+        partUsed--;
+        improperRowCount++;
     }
 }   //记录偏离中线均值10以上的点 滤掉跳变点
 
-for (i = 0; i < (Part_Used / 5); i++) {
-    Part_Err[i] = 0.000f;
+for (i = 0; i < (partUsed / 5); i++) {
+    partErr[i] = 0.000f;
 }   //最底下1/5区域置零, 为了平滑
 
-for (i = 0; i < Part_Used; i++) {
-    if (Improper_Row[i] == 0) {
-        Part_Err_Sum += Part_Err[i];
+for (i = 0; i < partUsed; i++) {
+    if (improperRow[i] == 0) {
+        partErrSum += partErr[i];
     }
 }   //累加非跳变点
 
-AngleErr  = Part_Err_Sum * Err_K / (float)Part_Used;
-AngleErr2 = AngleErr1;
-AngleErr1 = AngleErr0;
-AngleErr0 = AngleErr;
-AngleErr = AngleErr0 * 0.70f + AngleErr1 * 0.20f + AngleErr2 * 0.10f;
+angleErr  = partErrSum * errK / (float)partUsed;
+angleErr2 = angleErr1;
+angleErr1 = angleErr0;
+angleErr0 = angleErr;
+angleErr = angleErr0 * 0.70f + angleErr1 * 0.20f + angleErr2 * 0.10f;
 ```
 
 # 弯道控制：
