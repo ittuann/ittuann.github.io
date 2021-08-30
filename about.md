@@ -26,6 +26,6 @@ titles:
 key: page-about
 ---
 
-![Image](/assets/avatar.png){:.circle.shadow}
+<img src="/assets/avatar.png" alt="avatar" style="zoom:50%;" />{:.circle.shadow}
 
 🎉
