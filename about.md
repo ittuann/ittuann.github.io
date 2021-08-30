@@ -26,4 +26,6 @@ titles:
 key: page-about
 ---
 
+![Image](/assets/avatar.png){:.circle.shadow}
+
 🎉

@@ -186,6 +186,7 @@ highlighter : rouge
 permalink   : date
 
 exclude:
+  - /_posts/_img
   - /docs
   - /test
   - /docker
