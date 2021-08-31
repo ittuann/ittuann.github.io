@@ -45,10 +45,10 @@ for(i = startRow; i > validRow + 1; i --) {
     lineSum += weight1[i] * middleLine[i];
 }   //从下往上扫
 
-midlineNow  = (float)lineSum / weightSum - middleStandard;
+angleErr = (float)lineSum / weightSum - middleStandard;
 midline_fff = midline_ff;
 midline_ff  = midline_f;
-midline_f   = midlineNow;
+midline_f = angleErr;
 angleErr = midline_fff * 0.50f + midline_ff * 0.30f + midline_f * 0.20f;
 ```
 
@@ -64,7 +64,7 @@ angleErr = angleErr * 0.80f + slope * 0.20f;
 ```c
 memset(partErr, 0, sizeof(partErr));
 improperRowCount = 0;
-memset(improperrow, 0, sizeof(improperRow));
+memset(improperRow, 0, sizeof(improperRow));
 
 if (startPart > startRow)	startPart = startRow - 2;	//起始行限幅
 endPart = startPart - partUsed;
@@ -76,8 +76,8 @@ for (i = startPart; i > endPart; i--) {	//从下往上扫
 //        if (i == endPart - 2) {
 //            Part_Err[startPart - i] = partErr[startPart - i] * 1.20f;
 //        }   //放大截至行误差
-}	//相当于逆透视
-	//partUsed 相当于前瞻, 10行适合低速, 高速可以取15, 区域越小越灵敏
+}	//某种意义上相当于逆透视
+	//partUsed 相当于前瞻,区域越小越灵敏 10行适合低速,高速可以取15
 
 partAve = partAve / partUsed;			//计算范围内中线平均值
 for (i = startPart; i > endPart; i--) {
@@ -99,17 +99,17 @@ for (i = 0; i < partUsed; i++) {
 }   //累加非跳变点
 
 angleErr  = partErrSum * errK / (float)partUsed;
-angleErr2 = angleErr1;
-angleErr1 = angleErr0;
-angleErr0 = angleErr;
+angleErr_fff = angleErr_ff;
+angleErr_ff = angleErr_f;
+angleErr_f = angleErr;
 angleErr = angleErr0 * 0.70f + angleErr1 * 0.20f + angleErr2 * 0.10f;
 ```
 
 # 弯道控制：
 
-弯道的速度可以由公式![[公式]](https://www.zhihu.com/equation?tex=m%5Cfrac%7BV%5E%7B2%7D+%7D%7BR%7D+%3Dma%3DF)=![[公式]](https://www.zhihu.com/equation?tex=%5Cmu+mg)（F是摩擦力），这样V=![[公式]](https://www.zhihu.com/equation?tex=%5Csqrt%7B%5Cmu+gR%3Cbr%2F%3E%7D+),其中![[公式]](https://www.zhihu.com/equation?tex=%5Cmu+)是摩擦系数，由地面和轮胎决定，R是转弯半径。由于地面和轮胎在过弯时是给定的，这样在比赛中我们为了保证V大，只能保证更大的转弯半径。R越大，速度V就越大。所以稳定沿着电磁线循迹并不是最优解，最好是采用外内外切弯。即入弯时贴弯道的内弯，出弯时贴外弯。这种情况下赛车通过整个弯道过程中行车线半径是固定的，即定曲率行车线。
+弯道的速度的公式 $f = \mu\ mg = m\ \frac{v^2}{R}$ 。F是摩擦力；$\mu$是摩擦系数，由地面和轮胎决定；R是转弯半径。由于地面和轮胎在过弯时是给定的，这样在比赛中我们为了保证V大，只能保证更大的转弯半径。R越大，速度V就越大。所以稳定沿着电磁线循迹并不一定是最优解，最好是采用外内外切弯。即入弯时贴弯道的内弯，出弯时贴外弯。这种情况下赛车通过整个弯道过程中行车线半径是固定的，即定曲率行车线。弯道的速度控制方案也最好为，入弯减速避免打滑，出弯加速节约时间。
 
 <img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarTracking1.png" alt="img" style="zoom: 75%;" />
 
-实践中发现通过调整纯跟踪算法的预瞄距离，可以有效提高路径规划的最优性。对于全向车也是一样，弯道的控制方案最好为，入弯减速避免打滑，出弯加速节约时间。
+实践中发现通过调整纯跟踪算法的预瞄距离就能够有这样的效果，可以有效提高路径规划的最优性。
 
