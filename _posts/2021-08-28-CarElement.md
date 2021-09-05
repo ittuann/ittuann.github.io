@@ -3,9 +3,16 @@ layout: article
 title: 智能车元素的处理方案
 date: 2021-08-28
 tags: 智能车
+comment: true
 aside:
   toc: true
 ---
+
+元素的处理方案：环岛，坡道，三叉，以及直道和弯道的速度控制方案
+
+<!--more-->
+
+元素处理分到了两篇文章中：本篇元素的处理方案以及[全向组麦轮的特色控制方案](https://ittuann.github.io/2021/08/28/CarSpControl.html)。
 
 # 环岛：
 
@@ -24,77 +31,10 @@ aside:
 
 # 坡道：
 
-* 我们使用TFMiniPlus激光雷达测距来判断坡道。当距离降到一定阈值下即可判断坡道。
-* 我们将TFMiniPlus竖直倾斜安装，此时测距点在赛道上。水平安装同样可以，不过水平安装测距点不稳定，赛道铺设场地有限的情况下可能会与赛道挡板误判。
+* 我们使用 TFMiniPlus 激光雷达测距来判断坡道。当距离降到一定阈值下即可判断坡道。
+* 我们将 TFMiniPlus 竖直倾斜安装，此时测距点在赛道上。水平安装同样可以，不过水平安装测距点不稳定，赛道铺设场地有限的情况下可能会与赛道挡板误判。
 * 在识别到坡道后开始计步（Vy轴向编码器数值累加），路程判断在上坡进行到三分之一稳定后时开启加速并在下坡时关闭加速。路程经过上坡三分之一后对Vx和w两个自由度的每次输出进行限幅防止过量打角抖动，上坡前三分之一不限幅是为了让车身修正姿态。
 * 判断坡道结束可以仅使用计步，当距离超过测定阈值后结束坡道。也可以当测距再次出现极小值时判断坡道结束。为了防止下坡时二次识别，可以加上下坡后0.5s内不再识别第二个坡道。另外还可以用走过一定距离后识别正常赛道结束坡道，判断条件为计步超过小阈值并且测距恢复为正常距离值一定次数后即可判断结束。
-
-# 直道加速：
-
-​	全向组在赛道上匀速循迹很大可能不会有一个较高的速度，所以直道加速就显得很有必要。我们使用了五种直道加速的判断条件。
-
-## 中线判断加速：
-
-判断图像上半部分中线与赛道两边界无交点即可加速。
-
-```c
-for (i = startRow; i < endRow; i++) {
-    if ((endRow - startRow) < 5) {
-        break;
-    }   //行数过少取消判断
-    
-	if (middleStandard - leftBlack[i] > 4 && rightBlack[i] - middleStandard > 4) {
-        rowCount2++;
-    } else if (middleStandard - leftBlack[i] > 2 && rightBlack[i] - middleStandard > 2) {
-        rowCount++;
-    } else {
-        break;
-    }
-
-    if (rowCount == endRow - startRow) {
-		Gear = 8;
-    }
-    if (rowCount2 == endRow - startRow) {
-        Gear = 10;
-    }
-}   //判断中线上半部与赛道两边界无焦点即可加速
-```
-
-## 顶部有效图像判断加速：
-
-在正常计算中线误差的 for 循环内 当计算完前三分之一使用面积时，计算有效图像前三分之一的误差，用于远处判断加速。这样可以使运算更为高效。
-
-## 顶行采样判断直道加速：
-
-分别计算speed_line为20, 25, 30这三行的误差，并取最大值用于判断加速。
-
-```c
-speedLineErr = (ABS)(( 	5 * middleLine[speedLine] +
-						2 * middleLine[speedLine + 1] +
-                      	3 * middleLine[speedLine - 1]) / (10) - middleStandard);
-```
-
-## 有效行判断加速：
-
-当有效行在顶部时，给予加速。可以简单使用分段打表的方式，也可以拟合成线性关系。记得写限幅。
-
-## 距离判断加速：
-
-实际走过一定距离的直道, 就算是直道。有些时候小s不会判断加速，这时只是用车身姿态来判断，可以解决这些正常判断较为难以处理的情况。注意这样加有滞后性, 加速量不要给多。
-
-```c
-if (ABS((int16)(fabsf(carSpeedA))) < speedZone) {
-    disAccCount ++;
-} else {
-	disAccCount = 0;
-}
-
-if (disAccCount >= 500)	disAccCount = 500;	//限幅
-
-if (disAccCount > countZone) {
-	Gear = 3;
-}
-```
 
 # 三岔：
 
@@ -116,3 +56,77 @@ if (disAccCount > countZone) {
 
   **第八步**在旋转后前进一定距离，原因同第三步。至此三叉的一条边处理结束。左三叉也是相同的处理方式。
 
+# 直道加速：
+
+​    全向组在赛道上匀速循迹很大可能不会有一个较高的速度，所以直道加速就显得很有必要。我们使用了五种直道加速的判断条件。
+
+## 中线判断加速：
+
+判断图像上半部分中线与赛道两边界无交点即可加速。
+
+```c
+for (i = startRow; i < endRow; i++) {
+    if ((endRow - startRow) < 5) {
+        break;
+    }   //行数过少取消判断
+    
+    if (middleStandard - leftBlack[i] > 4 && rightBlack[i] - middleStandard > 4) {
+        rowCount2++;
+    } else if (middleStandard - leftBlack[i] > 2 && rightBlack[i] - middleStandard > 2) {
+        rowCount++;
+    } else {
+        break;
+    }
+
+    if (rowCount == endRow - startRow) {
+        Gear = 8;
+    }
+    if (rowCount2 == endRow - startRow) {
+        Gear = 10;
+    }
+}   //判断中线上半部与赛道两边界无焦点即可加速
+```
+
+## 顶部有效图像判断加速：
+
+在正常计算中线误差的 for 循环内 当计算完前三分之一使用面积时，计算有效图像前三分之一的误差，用于远处判断加速。这样可以使运算更为高效。
+
+## 顶行采样判断直道加速：
+
+分别计算speed_line为20, 25, 30这三行的误差，并取最大值用于判断加速。
+
+```c
+speedLineErr = (ABS)((  5 * middleLine[speedLine] +
+                        2 * middleLine[speedLine + 1] +
+                        3 * middleLine[speedLine - 1]) / (10) - middleStandard);
+```
+
+## 有效行判断加速：
+
+当有效行在顶部时，给予加速。可以简单使用分段打表的方式，也可以拟合成线性关系。记得写限幅。
+
+## 距离判断加速：
+
+实际走过一定距离的直道, 就算是直道。有些时候小s不会判断加速，这时只是用车身姿态来判断，可以解决这些正常判断较为难以处理的情况。注意这样加有滞后性, 加速量不要给多。
+
+```c
+if (ABS((int16)(fabsf(carSpeedA))) < speedZone) {
+    disAccCount ++;
+} else {
+    disAccCount = 0;
+}
+
+if (disAccCount >= 500)    disAccCount = 500;    //限幅
+
+if (disAccCount > countZone) {
+    Gear = 3;
+}
+```
+
+# 弯道控制：
+
+弯道的速度的公式 $f = \mu\ mg = m\ \frac{v^2}{R}$ 。F是摩擦力；$\mu$是摩擦系数，由地面和轮胎决定；R是转弯半径。由于地面和轮胎在过弯时是给定的，这样在比赛中我们为了保证V大，只能保证更大的转弯半径。R越大，速度V就越大。所以稳定沿着电磁线循迹并不一定是最优解，最好是采用外内外切弯。即入弯时贴弯道的内弯，出弯时贴外弯。这种情况下赛车通过整个弯道过程中行车线半径是固定的，即定曲率行车线。弯道的速度控制方案也最好为，入弯减速避免打滑，出弯加速节约时间。
+
+<img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarElement1.png" alt="img" style="zoom: 75%;" />
+
+实践中发现通过调整纯跟踪算法的预瞄距离就能够有这样的效果，可以有效提高路径规划的最优性。
