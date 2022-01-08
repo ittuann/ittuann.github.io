@@ -54,7 +54,7 @@ aside:
 
   **第七步**在前进完成后使车身旋转150度。
 
-  **第八步**在旋转后前进一定距离，原因同第三步。至此三叉的一条边处理结束。左三叉也是相同的处理方式。
+  **第八步**在旋转后前进一定距离，原因同第三步。至此三叉的一条边处理结束。左三叉也是相同的处理流程。
 
 # 直道加速：
 
@@ -103,7 +103,7 @@ speedLineErr = (ABS)((  5 * middleLine[speedLine] +
 
 ## 有效行判断加速：
 
-当有效行在顶部时，给予加速。可以简单使用分段打表的方式，也可以拟合成线性关系。记得写限幅。
+当有效行在顶部时，给予加速。可以简单使用分段打表的方式，也可以拟合成线性关系。记得写限幅！
 
 ## 距离判断加速：
 
@@ -130,3 +130,7 @@ if (disAccCount > countZone) {
 <img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarElement1.png" alt="img" style="zoom: 75%;" />
 
 实践中发现通过调整纯跟踪算法的预瞄距离就能够有这样的效果，可以有效提高路径规划的最优性。
+
+
+
+元素处理分到了两篇文章中：本篇元素的处理方案以及[全向组麦轮的特色控制方案](https://ittuann.github.io/2021/08/28/CarSpControl.html)。
