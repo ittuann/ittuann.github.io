@@ -1,6 +1,6 @@
 ---
 layout: article
-title: 智能车麦轮特色控制
+title: 智能车探索麦轮特色控制
 date: 2021-08-28
 tags: 智能车
 comment: true
@@ -8,7 +8,7 @@ aside:
   toc: true
 ---
 
-全向组麦轮的特色控制方案。
+探索全向组麦轮的特色控制方案。
 
 这篇麦轮的特色控制方案，不仅有我们实践出来效果不错并最终运用的，也有实践了效果一般但觉得思路或许还可以，也有实践效果很差可能是理论出问题但想法或许能有用的。这些情况也都会注明，这篇的作用更多是抛砖引玉！也希望大家能一起讨论！
 
@@ -20,19 +20,19 @@ aside:
 
 麦轮安装后通过速度分解，将底盘的运动期望解算至电机转速，分别控制四个轮子的转速，即可实现3个独立自由度上的运动运动。麦克纳姆轮驱动的车属与于 Holonomic，它的控制自由度等于整体自由度，因为它可以在平面坐标系内沿任意方向移动。小车可以由 2个平面移动自由度和 1个转动自由度分别控制。 2个平面自由度控制小车的位置， 1个转动自由度控制小车的姿态。所以小车所有的运行状况都可以用这三种情况耦合而成。
 
-<img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarSpControl1.png" alt="img" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/2021-08-28-CarSpControl1.png" alt="img" style="zoom:50%;" />
 
 麦轮的运动模型推算过程略过，可以阅读参考资料，这里直接给出结论
 
-<img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarSpControl2.jpg" alt="img" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/2021-08-28-CarSpControl2.jpg" alt="img" style="zoom:50%;" />
 
 可以解算出四个轮子的转速为
 
-<img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarSpControl3.png" alt="img" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/2021-08-28-CarSpControl3.png" alt="img" style="zoom:50%;" />
 
 同理，根据逆运动学模型中的三个方程逆向运算可解得，正运动学模型方程组为
 
-<img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarSpControl4.png" alt="img" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/2021-08-28-CarSpControl4.png" alt="img" style="zoom:50%;" />
 
 # 常规控制方案
 

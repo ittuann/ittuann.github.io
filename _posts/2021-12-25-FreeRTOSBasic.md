@@ -46,7 +46,7 @@ aside:
   }
   ```
 
-- CubeMX在配置FreeRTOS时默认使用与HAL库相同的SysTick滴答定时器。为了避免时钟线混乱冲突，需要在System Core-SYS-Timebase Source选择一个其他的定时器。
+- CubeMX在配置FreeRTOS时默认使用与HAL库相同的SysTick滴答定时器。为了避免时钟线混乱冲突，需要在System Core-SYS-Timebase Source选择一个其他的定时器。***一定注意要切换时钟源！***
 
   STM32的TIM分为高级定时器、通用定时器和基本定时器。其中基本定时器的功能最简单，只有定时的功能，一般用作时钟基源；通用定时器在基本的定时功能的基础上多出了输出比较和输入捕获功能。输出比较可以输出周期性的方波（比如PWM波和PPM波），输入捕获可以读取输入信号的高电平和低电平的时间进而可以计算出信号的周期和占空比；高级定时器除了上述功能之外，还有还包含无互补信号输出以及带刹车(断路)功能等电机控制~~（日常用不太到的）~~高级功能
 
@@ -69,8 +69,8 @@ aside:
 ## 消息队列的创建
 
 ```c
-QueueHandle_t messageQueue[QUEUE_NUM];	// 声明消息队列句柄
-bool_t messageQueueCreateFlag = false;	// 消息队列创建完成标志位
+QueueHandle_t messageQueue[QUEUE_NUM] = {NULL};	// 声明消息队列句柄
+bool_t messageQueueCreateFlag = false;			// 消息队列创建完成标志位
 
 enum MessageQueue_e {
 	// 0-(MOTOR_NUM-1)给电机
@@ -144,7 +144,7 @@ void MessageQueueCreate(void)
 
   查询队列是否为空/满，只能在中断中使用。返回`pdFALSE`或`pdTRUE`
 
-- 遇到问题可以参考FreeRTOS官方API文档 https://www.freertos.org/a00018.html
+- 遇到问题可以参考FreeRTOS消息官方API文档 https://www.freertos.org/a00018.html
 
 ## 消息接收
 
@@ -195,6 +195,8 @@ xQueueReceive(messageQueue, &useData, (1 / portTICK_RATE_MS));
 - `vTaskDelayUntil()`为绝对延时。绝对延时能够提供精度更高的定时效果。
 
   延时的时间单位为系统节拍时钟周期。如果1节拍不是1ms或是想要规范标准化代码可以使用`5 / portTICK_RATE_MS`或`pdMS_TO_TICKS(5UL)`
+  
+  ***如果是需要周期运行的任务程序（比如电机PID控制），最好用绝对延时替换相对延时保证任务运行精确***
 
 ```c
 void TestTask(void const * argument)
@@ -256,11 +258,15 @@ void TestTask(void const * argument)
     while(1)
 	{
         // 等待信号量 阻塞时间设置为最多为10ms
-        // 也可以设置成等待到永远 osWaitForever
-        if (xSemaphoreTake(xSemaphore, (TickType_t)(10 / portTICK_RATE_MS)) == pdTRUE ) {
+        // 也可以设置成等待到永远让任务一直等待 portMAX_DELAY / osWaitForever
+        if (xSemaphoreTake(xSemaphore, (TickType_t)(10 / portTICK_RATE_MS)) == pdTRUE) {
              // 任务内容...
         } else {
             
+        }
+        // 也可以换成用whlie的死循环写法
+        while (xSemaphoreTake(xSemaphore, (TickType_t)(10 / portTICK_RATE_MS)) != pdPASS)
+        {
         }
     }
 }
@@ -274,6 +280,8 @@ static BaseType_t xHigherPriorityTaskWoken = pdFALSE;	// 不请求上下文切�
 xSemaphoreGiveFromISR(xSemaphore, &xHigherPriorityTaskWoken);
 portYIELD_FROM_ISR(xHigherPriorityTaskWoken);			// 判断是否请求上下文切换
 ```
+
+- 也可以设置成任务等待信号量到永远`portMAX_DELAY` / `osWaitForever `
 
 # 互斥量
 
@@ -293,7 +301,7 @@ portYIELD_FROM_ISR(xHigherPriorityTaskWoken);			// 判断是否请求上下文�
 
   递归互斥量还没有完全弄明白就先不写了（逃
 
-  更多可以参考FreeRTOS官方API文档  https://www.freertos.org/a00113.html
+  更多可以参考FreeRTOS信号量官方API文档  https://www.freertos.org/a00113.html
 
 # 任务通知
 

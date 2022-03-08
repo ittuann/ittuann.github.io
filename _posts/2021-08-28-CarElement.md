@@ -127,7 +127,7 @@ if (disAccCount > countZone) {
 
 弯道的速度的公式 $f = \mu\ mg = m\ \frac{v^2}{R}$ 。F是摩擦力；$\mu$是摩擦系数，由地面和轮胎决定；R是转弯半径。由于地面和轮胎在过弯时是给定的，这样在比赛中我们为了保证V大，只能保证更大的转弯半径。R越大，速度V就越大。所以稳定沿着电磁线循迹并不一定是最优解，最好是采用外内外切弯。即入弯时贴弯道的内弯，出弯时贴外弯。这种情况下赛车通过整个弯道过程中行车线半径是固定的，即定曲率行车线。弯道的速度控制方案也最好为，入弯减速避免打滑，出弯加速节约时间。
 
-<img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarElement1.png" alt="img" style="zoom: 75%;" />
+<img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/2021-08-28-CarElement1.png" alt="img" style="zoom: 75%;" />
 
 实践中发现通过调整纯跟踪算法的预瞄距离就能够有这样的效果，可以有效提高路径规划的最优性。
 

@@ -20,7 +20,7 @@ aside:
 
 * 麦轮的安装：麦轮一般是四个一组使用，两个左旋轮，两个右旋轮。左旋轮和右旋轮呈手性对称。常用的有两种安装方式，分为O型和X型，其中X和O表示的是与四个轮子地面接触的辊子所形成的图形。又可以根据四个轮子与地面接触点所围成的形状分为正方形与长方形。传动力矩的长度上O型大于X长方形，且X正方形轮子转动产生的力矩会经过同一个点，yaw 轴无法主动旋转和保持角度，因此一般安装时采用O型。科宇的车模为正方形，四个轮子上滚轮的转动轴汇聚于底板中心，我们也选择了O型来安装。
 
-  <img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarMachine1.jpg" alt="img" style="zoom:20%;" />
+  <img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/2021-08-28-CarMachine1.jpg" alt="img" style="zoom:20%;" />
 
 
 # 轮胎处理

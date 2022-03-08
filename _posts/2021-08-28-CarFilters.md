@@ -130,7 +130,7 @@ void AccLowpassIIR2Filter_E(void)
 
 打开 Matlab 在APP中选择 Filter Designer（fdatool）
 
-<img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/CarFilters-IIR.png" alt="img" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/2021-08-28-CarFilters-IIR.png" alt="img" style="zoom:50%;" />
 
 - 设计方法（Design Method）用于选择IIR滤波器还是FIR滤波器。这里我们选择IIR滤波器，类型选择Butterworth。当然也可以选择其他类型，不同类型的频率响应不同，选择后默认的滤波器结构是直接II型。
 
