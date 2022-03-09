@@ -395,8 +395,10 @@ void supervise(void const * argument)
 
 **参考资料**
 
-FreeRTOS官方API文档 https://www.freertos.org/a00106.html
-
-掌握 FreeRTOS™ 实时内核 https://freertoskernel.asicfans.com/
-
-https://blog.csdn.net/qq_27114397/category_8113756.html
+> FreeRTOS官方API文档 https://www.freertos.org/a00106.html
+>
+> [野火]FreeRTOS 内核实现与应用开发实战—基于STM32 https://doc.embedfire.com/rtos/freertos/zh/latest/index.html
+>
+> 掌握 FreeRTOS™ 实时内核 https://freertoskernel.asicfans.com/
+>
+> https://blog.csdn.net/qq_27114397/category_8113756.html
