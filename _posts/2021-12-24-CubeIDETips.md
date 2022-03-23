@@ -12,9 +12,17 @@ aside:
 
 <!--more-->
 
-来到RM之后平台稳定的换到了STM32。很多IDE都支持STM32的开发，比较常用的是Keil，也有用IAR来开发的。后来在STM官网发现了STM32CubeIDE，这个IDE相当于是TrueSTUDIO的上位替代。毕竟是官方出品也整合了CubeMX的功能，尝试着使用了一段时间感觉还蛮不错的，就决定一直用下去了。
+来到RM之后平台稳定的换到了STM32。很多IDE都支持STM32的开发，比较常用的是MDK的Keil，也有用IAR来开发的。后来在ST官网发现了STM32CubeIDE，这个IDE相当于是TrueSTUDIO的上位替代。毕竟是官方出品也整合了CubeMX的功能，尝试着使用了一段时间感觉还蛮不错的，就决定一直用下去了。
 
-STM32CubeIDE是基于Eclipse开发的。英飞凌的AURIX Studio和沁恒的MounRiver Studio也都是Eclipse修改来的，界面风格比较相似直接上手也不会有很割裂的感觉。
+ST的STM32CubeIDE是基于Eclipse开发的。英飞凌的AURIX Studio和沁恒的MounRiver Studio也都是Eclipse修改来的，界面风格比较相似直接上手也不会有很割裂的感觉。Eclipse方案的优势相对而言是开源免费，并且跨平台方便。劣势是JAVA类软件的通病，资源需求比较大。
+
+像Embedded Studio这样的新型IDE还没来得及去尝试。网页版的Keil Studio颜值上来了但还没有离线版如果作为长期使用的IDE现阶段多少有些不放心。另外微软官方也下场制作了Visual Studio 2022和VSCode的方案。相信之后选择会越来越多样的。
+
+
+
+22.03.13 好家伙MDK推出了个人免费使用版本，只要不是用于商用随便用。登录领license。 https://www.keil.arm.com/mdk-community/
+
+另外发现MDK和Keil Studio现在也支持相互导入了。
 
 
 
