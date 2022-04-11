@@ -28,4 +28,8 @@ key: page-about
 
 <img src="/assets/avatar.png" alt="avatar" style="zoom:50%;" />{:.circle.shadow}
 
-🎉
+Hi there🎉
+
+博客的核心还是内容。等到能够有一定程度的产出再迁移到 WordPress 之类吧~
+
+可以发邮件来找我聊天！  ittuann@outlook.com

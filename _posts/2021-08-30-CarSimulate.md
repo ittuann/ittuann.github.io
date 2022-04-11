@@ -43,9 +43,11 @@ aside:
 
 首先，在顶部选择导入数据，打开匿名上位机保存出来的CSV文件，选中速度的那列数据，并在上方将输出类型更改为数值矩阵，最后点击右侧将电机转速数据导入工作区。
 
-还需要输入数据，也就是给电机的PWM定值。因为是定值所以只需要创建一个与输出数据元素个数相同的列向量即可。以上面图片的数据和情况为例，则是 `PWM=linspace(1000,1000,170)` `。 注意需要在最后加上 “ ' ” 将行向量转为列向量。
+还需要输入数据，也就是给电机的PWM定值。因为是定值所以只需要创建一个与输出数据元素个数相同的列向量即可。以上面图片的数据和情况为例，则是 `PWM = linspace(1000,1000,170)` `。 注意需要在最后加上 “ ' ” 将行向量转为列向量。
 
 ### 导入数据到系统辨识工具箱
+
+系统辨识这边我们自然选择的是根据数据建模的方案，而非直接使用机理建模。
 
 之后在 Matlab 的 App 中选择 `System Identification`
 
@@ -71,7 +73,15 @@ aside:
 
 `I/O Delay`是延时时间不用管默认0即可。也可以取消勾选`Time delay`中的`Fixed`，设置好Minimum和Maximum后会在区间内自动辨识时间延迟。
 
-`Estimate`等待一小段时间的计算后即会计算出结果。拟合率一般`80%`为经验可用的界限。此时右侧的模型窗口出现了辨识的`tf1`，把辨识结果`tf1`拖拽到`To Workspace`即可导出到工作区，系统辨识完成。这时回到Matlab主窗口即可查看工作区里tf1的信息。
+`Estimate`等待一小段时间的计算后即会计算出结果。拟合率一般`80%`为经验可用的界限。此时右侧的模型窗口出现了辨识的`tf1`
+
+勾选`Model output`即可查看辨识结果。将辨识结果与原始实验数据叠加在一起，可以看到模型的辨识效果很好。
+
+![Simulink8](https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/2021-08-30-CarSimulate8.png)
+
+（只是为了演示就只采集了一小部分数据采样频率也不高
+
+把辨识结果`tf1`拖拽到`To Workspace`即可导出到工作区，系统辨识完成。这时回到Matlab主窗口即可查看工作区里tf1的信息。
 
 ![Simulink3](https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/2021-08-30-CarSimulate3.png)
 
@@ -80,6 +90,10 @@ aside:
 按图连接节点，名称已经标出
 
 ![Simulink4](https://raw.githubusercontent.com/ittuann/ittuann.github.io/main/_posts/_img/2021-08-30-CarSimulate4.png)
+
+也可以加入延迟模块模拟电机系统
+
+（离散型其实应该使用的是Discrete PID Controller和Discrete Transfer Fcn
 
 双击`Transfer Fcn`填入刚刚辨识完的传递函数。具体数据双击工作区的tf1直接复制`tf1.Denominator`和`tf1.Numerator`即可
 
