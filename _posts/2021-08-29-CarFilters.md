@@ -50,7 +50,7 @@ $$
 y_{\left(n\right)}=b_0x_{\left(n\right)}+b_1x_{\left(n-1\right)}+\ldots+b_Mx_{\left(n-M\right)}-a_1y_{\left(n-1\right)}-\ldots-a_Ny_{\left(n-N\right)}
 $$
 
-IIR滤波就是这个个方程。y为输出数据，x为输入数据，a和b为滤波器的系数。
+IIR滤波就是这个个方程。yn为输出数据，xn为输入数据，a和b为滤波器的系数。
 
 ## C语言实现：
 
@@ -154,7 +154,7 @@ $$
 y_{(n)}=\sum_{k=0}^{N-1}{k_{(k)}x_{(n-k)}}
 $$
 
-FIR滤波就是这个个方程。x(n)为输入信号，h(n)为FIR滤波系数，y(n)为经过滤波后的信号；N表示FIR滤波器的抽头数，滤波器阶数为N-1。
+FIR滤波就是这个个方程。x(n)为输入信号，k(n)为FIR滤波系数，y(n)为经过滤波后的信号；N表示FIR滤波器的抽头数，滤波器阶数为N-1。
 
 ## C语言实现：
 

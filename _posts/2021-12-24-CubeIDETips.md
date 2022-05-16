@@ -20,7 +20,7 @@ ST的STM32CubeIDE是基于Eclipse开发的。英飞凌的AURIX Studio和沁恒�
 
 
 
-22.03.13 好家伙MDK推出了个人免费使用版本，只要不是用于商用随便用。登录领license。 https://www.keil.arm.com/mdk-community/
+22.03.13 好家伙MDK推出了个人免费使用版本，只要不是用于商用随便用。登录领license。 <https://www.keil.arm.com/mdk-community/>
 
 另外发现MDK和Keil Studio现在也支持相互导入了。
 
@@ -57,7 +57,7 @@ CubeIDE对SWV仿真的支持比Keil要好些。
 
 SWV支持的扩展功能有很多。向控制台输出信息；变量追踪和绘制；函数耗时占比统计；异常与中断追踪；SWV追踪日志；RTOS实时状态查看
 
-这篇文章还蛮不错的 博客配图不方便我就不再写了（逃 https://blog.csdn.net/Naisu_kun/article/details/97393547
+这篇文章还蛮不错的 博客配图不方便我就不再写了（逃 <https://blog.csdn.net/Naisu_kun/article/details/97393547>
 
 另外说一下，正版的ST-LINK V2是不支持给开发板供电的。T_VCC是官方ST-LINK特有的引脚，需要将MCU电源连接至该引脚，而没有供电功能。反而是长得像U盘一样的盗版下载器可以直接供电。
 
@@ -131,5 +131,5 @@ CubeIDE本身不带有自动补全功能，需要 Alt+/  的快捷键才能显�
 
   默认下printf只能输出整形。右键项目选择`Prorerties` ，在弹出窗口的 `C/C++ Build > Settings > Tool Settings > MCU Settings` ，勾选`Use float with printf from newlib-nano (-u_printf float)` 
   
-- 另外可以看下稚晖军写的配置CLion用于STM32开发 https://zhuanlan.zhihu.com/p/145801160
+- 另外可以看下稚晖军写的配置CLion用于STM32开发 <https://zhuanlan.zhihu.com/p/145801160>
 
