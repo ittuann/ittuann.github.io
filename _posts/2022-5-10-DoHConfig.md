@@ -1,7 +1,7 @@
 ---
 layout: article
 title: 记录下DoH配置
-date: 2022-5-10
+date: 2022-05-10
 tags: ["Other"]
 comment: true
 aside:
