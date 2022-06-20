@@ -127,9 +127,13 @@ CubeIDE本身不带有自动补全功能，需要 Alt+/  的快捷键才能显�
 
   右键项目选择 `Prorerties` ，在弹出窗口的 `C/C++ Build > Settings > Tool Settings > MCU xxx Compiler > Optimization`下即可修改优化等级
 
+- 修改ROM起始地址
+
+  修改`STM32F407IGHX_FLASH.ld`中`FLASH    (rx)    : ORIGIN = 0x8000000` 
+
 - 开启串口重定向printf的浮点数支持
 
   默认下printf只能输出整形。右键项目选择`Prorerties` ，在弹出窗口的 `C/C++ Build > Settings > Tool Settings > MCU Settings` ，勾选`Use float with printf from newlib-nano (-u_printf float)` 
-  
+
 - 另外可以看下稚晖军写的配置CLion用于STM32开发 <https://zhuanlan.zhihu.com/p/145801160>
 

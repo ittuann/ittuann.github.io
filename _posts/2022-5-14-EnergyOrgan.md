@@ -97,18 +97,18 @@ ADC的DMA中断函数为`DMA2_Stream0_IRQHandler`。可以直接在DMA中断函�
 uint16_t adcx_get_chx_value(ADC_HandleTypeDef *ADCx, uint32_t ch)
 {
 	static ADC_ChannelConfTypeDef sConfig = {0};
-    sConfig.Channel = ch;							// ADC转换通道
-    sConfig.Rank = 1;								// ADC序列排序 即转换顺序
-    sConfig.SamplingTime = ADC_SAMPLETIME_15CYCLES;	// ADC采样时间
+	sConfig.Channel = ch;							// ADC转换通道
+	sConfig.Rank = 1;								// ADC序列排序 即转换顺序
+	sConfig.SamplingTime = ADC_SAMPLETIME_15CYCLES;	// ADC采样时间
 
 	HAL_ADC_ConfigChannel(ADCx, &sConfig);			// 设置ADC通道的各个属性值
 //	if (HAL_ADC_ConfigChannel(ADCx, &sConfig) != HAL_OK) {
 //		Error_Handler();							// Debug时使用
 //	}
     
-    HAL_ADC_Start(ADCx);							// 开启ADC采样
+	HAL_ADC_Start(ADCx);							// 开启ADC采样
 
-    HAL_ADC_PollForConversion(ADCx, 1);				// 等待ADC转换结束
+	HAL_ADC_PollForConversion(ADCx, 1);				// 等待ADC转换结束
 
 	if (HAL_IS_BIT_SET(HAL_ADC_GetState(ADCx), HAL_ADC_STATE_REG_EOC)) {	// 判断转换完成标志位是否设置
 		return (uint16_t)(HAL_ADC_GetValue(ADCx));	// 获取ADC值
@@ -128,7 +128,11 @@ STM32F4自带了RBG硬件随机数发生器，RNG处理器是一个以连续模�
 
 生成的 `MX_RNG_Init();` 已经完成了所需的初始化。初始化的过程很简单，首先使能挂载到AHB2总线的随机数发生器时钟，然后使能随机数发生器即可完成初始化。
 
-`uint32_t HAL_RNG_GetRandomNumber(RNG_HandleTypeDef *hrng);`  函数用于读取随机数值。
+```c
+uint32_t HAL_RNG_GetRandomNumber(RNG_HandleTypeDef *hrng);  
+```
+
+该函数用于读取随机数值。
 
 每次读取之前，须先判断RNG_SR这个RNG 状态寄存器的DRDY最低位，如果该位为1则则说明RNG_DR这个数据寄存器的数据是有效的，可以读取得到随机数值，读取后该位自动清零；如果不为 1则需要等待。该函数已包含判断DRDY位并返回读取到的随机数值。
 
