@@ -8,7 +8,7 @@ aside:
   toc: true
 ---
 
-第二十一届 RoboMaster 机甲大师竞赛Ares战队 空中机器人六轴无人机云台程序框架。
+第二十一届 RoboMaster 机甲大师竞赛Ares战队 空中机器人六轴无人机云台程序框架开源。
 
 项目希望探索出，能够给 RoboMaster 比赛中的所有机器人都能使用的一套代码架构。
 

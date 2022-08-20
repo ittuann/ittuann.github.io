@@ -154,4 +154,4 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 }
 ```
 
-完整的工程可以看我开源的飞机云台程序~
+完整的工程可以看我开源的 [飞机云台程序](https://github.com/ittuann/RoboMaster_UAV-Gimbal_Ares2022) <https://github.com/ittuann/RoboMaster_UAV-Gimbal_Ares2022>
