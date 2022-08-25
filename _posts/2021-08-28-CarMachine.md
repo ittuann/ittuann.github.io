@@ -2,8 +2,10 @@
 layout: article
 title: 机械结构设计与踩雷
 date: 2021-08-28
+key: P2021-08-28-2
 tags: 智能车
 comment: true
+sharing: true
 aside:
   toc: true
 ---

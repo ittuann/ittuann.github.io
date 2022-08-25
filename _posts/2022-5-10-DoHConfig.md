@@ -2,8 +2,10 @@
 layout: article
 title: 记录下DoH配置
 date: 2022-05-10
+key: P2022-05-10
 tags: ["Other"]
 comment: true
+sharing: true
 aside:
   toc: true
 ---
