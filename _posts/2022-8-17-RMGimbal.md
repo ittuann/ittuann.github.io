@@ -4,13 +4,14 @@ title: RoboMaster程序框架开源
 date: 2022-08-17
 tags: ["STM32","RoboMaster"]
 comment: true
+sharing: true
 aside:
   toc: true
 ---
 
 第二十一届 RoboMaster 机甲大师竞赛Ares战队 空中机器人六轴无人机云台程序框架开源。
 
-项目希望探索出，能够给 RoboMaster 比赛中的所有机器人都能使用的一套代码架构。
+项目希望探索出，能够给 RoboMaster 比赛中的所有机器人都能使用的一套代码架构。，即不同的机器人仅需要修改程序中的结构体和控制器即可复用。因此在设计程序架构时，尽量提高了代码的复用性，并将函数模块化和参数化。
 
 <!--more-->
 
@@ -21,6 +22,8 @@ aside:
 单片机为RM开发板C型，STM32F407IGHx
 
 开源了程序框架用于讨论。 ~~赛后会整理完整的项目工程~~  无人机摔了三次，项目被迫暂停，已上传目前的完整框架工程。
+
+RoboMaster 论坛本帖地址: <https://bbs.robomaster.com/forum.php?mod=viewthread&tid=22085>
 
 项目希望探索出，能够给 RoboMaster 比赛中的所有机器人都能使用的一套代码架构，即不同的机器人仅需要修改程序中的结构体和控制器即可复用。因此在设计程序架构时，尽量提高了代码的复用性，并将函数模块化和参数化。
 

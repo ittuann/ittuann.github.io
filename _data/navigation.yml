@@ -29,6 +29,9 @@ header:
       # @end locale config
     url: /archive.html
 
+  - title:      GitHub
+    url:        https://github.com/ittuann
+
   - titles:
       # @start locale config
       en      : &EN       About
