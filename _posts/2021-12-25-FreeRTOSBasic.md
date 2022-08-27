@@ -4,6 +4,7 @@ title: 探索FreeRTOS的一些功能和用法
 date: 2021-12-25
 key: P2021-12-25-3
 tags: ["STM32","RoboMaster"]
+show_author_profile: true
 comment: true
 sharing: true
 aside:

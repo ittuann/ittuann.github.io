@@ -4,6 +4,7 @@ title: CAN通信配置过滤器和使用三个邮箱发送
 date: 2021-12-25
 key: P2021-12-25-1
 tags: ["STM32","RoboMaster"]
+show_author_profile: true
 comment: true
 sharing: true
 aside:

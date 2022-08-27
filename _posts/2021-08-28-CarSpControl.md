@@ -4,6 +4,7 @@ title: 智能车探索麦轮特色控制
 date: 2021-08-28
 key: P2021-08-28-4
 tags: 智能车
+show_author_profile: true
 comment: true
 sharing: true
 aside:

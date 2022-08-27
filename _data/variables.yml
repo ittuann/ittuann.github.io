@@ -30,10 +30,10 @@ default:
     show_edit_on_github: false
     show_date: true
     show_tags: true
-    show_author_profile: false
+    show_author_profile: true
     show_subscribe: false
     full_width: false
-    sharing: false
+    sharing: true
     comment: true
     license: false
     pageview: false

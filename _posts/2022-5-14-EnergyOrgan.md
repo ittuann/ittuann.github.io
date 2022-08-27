@@ -4,6 +4,7 @@ title: 能量机关其他部分的配置
 date: 2022-05-14
 key: P2022-05-14
 tags: ["STM32","RoboMaster"]
+show_author_profile: true
 comment: true
 sharing: true
 aside:

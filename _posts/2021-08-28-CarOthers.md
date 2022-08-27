@@ -4,6 +4,7 @@ title: 智能车杂项
 date: 2021-08-28
 key: P2021-08-28-3
 tags: 智能车
+show_author_profile: true
 comment: true
 sharing: true
 aside:

@@ -4,6 +4,7 @@ title: 智能车电机系统辨识和PID仿真自动调参
 date: 2021-08-29
 key: P2021-08-29-3
 tags: ["智能车","PID"]
+show_author_profile: true
 comment: true
 sharing: true
 aside:

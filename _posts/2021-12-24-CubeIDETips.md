@@ -4,6 +4,7 @@ title: STM32CubeIDE的一点使用技巧
 date: 2021-12-24
 key: P2021-12-24-1
 tags: ["STM32","RoboMaster"]
+show_author_profile: true
 comment: true
 sharing: true
 aside:
