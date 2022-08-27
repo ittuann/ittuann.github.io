@@ -24,6 +24,7 @@ titles:
   fr-LU   : *FR
   # @end locale config
 key: page-about
+show_author_profile: false
 ---
 
 <img src="./assets/avatar.png" alt="avatar" style="zoom:50%;" />{:.circle.shadow}
