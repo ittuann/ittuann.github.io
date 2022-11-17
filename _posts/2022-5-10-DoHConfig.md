@@ -93,3 +93,9 @@ IOS15 在 `设置 - 通用 - 设备管理 - DNS` 启用
 Chrome: 设置 - 隐私设置和安全性 - 安全 - 使用安全DNS
 
 Firefox: 设置 - 常规 - 网络设置 - 设置 - 启用基于 HTTPS 的 DNS
+
+# 检测是否正在使用DOH
+
+<https://1.1.1.1/help>
+
+<https://www.cloudflare.com/zh-cn/ssl/encrypted-sni>

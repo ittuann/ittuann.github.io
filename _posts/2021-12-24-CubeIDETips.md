@@ -37,15 +37,16 @@ ST的STM32CubeIDE是基于Eclipse开发的。英飞凌的AURIX Studio和沁恒�
 
 只列出了常用的几个。另外最好按习惯换一下两个搜索功能的默认快捷键。
 
-| 快捷键 | 说明                               |
-| ------ | ---------------------------------- |
-| Ctrl+Z | 撤销                               |
-| Ctrl+Y | 撤回                               |
-| Alt+/  | 代码补全                           |
-| Ctrl+F | 当前文件内搜索（Find and Replace） |
-| Ctrl+H | 项目内搜索（Open Search Dialog）   |
-| F3     | 跳转到声明处                       |
-| F11    | 启动调试                           |
+| 快捷键       | 说明                               |
+| ------------ | ---------------------------------- |
+| Ctrl+Z       | 撤销                               |
+| Ctrl+Y       | 重做(撤回)                         |
+| Ctrl+Shift+Z | 重做(撤回)                         |
+| Alt+/        | 代码补全                           |
+| Ctrl+F       | 当前文件内搜索（Find and Replace） |
+| Ctrl+H       | 项目内搜索（Open Search Dialog）   |
+| F3           | 跳转到声明处                       |
+| F11          | 启动调试                           |
 
 
 

@@ -27,7 +27,7 @@ key: page-about
 show_author_profile: false
 ---
 
-<img src="./assets/avatar.png" alt="avatar" style="zoom:50%;" />{:.circle.shadow}
+<img src="/assets/avatar.png" alt="avatar" style="zoom:50%;" />{:.circle.shadow}
 
 Hi there🎉
 
@@ -37,11 +37,15 @@ Hi there🎉
 
 站点建设的初衷是作笔记同时再分享些东西。不过当前的内容咸鱼的很，还有很多想做的东西和想写的内容没有弄上来，有待完善！
 
-目前 <https://ittuann.netlify.app> (主) 和 <https://ittuann.github.io> 均可访问博客，内容完全相同。
+目前 <https://ittuann.netlify.app>  和 <https://ittuann.github.io> 均可访问博客，内容完全相同。
 
 ------
 
 是本科生在读，也做了一些竞赛，生活还是蛮充实和有趣的（笑
+
+高考报考的时候误打误撞进了天坑专业，后来凭着兴趣和热爱自学了编程 ~
+
+也许是因为自学的经历，我对开源充满了热情！也想要或多或少为开源社区做出一些贡献！
 
  <details>
 <summary>展开我的竞赛和部分项目经历 &darr;</summary>
@@ -57,6 +61,10 @@ Hi there🎉
     <tr>
         <td>全国大学生智能车竞赛-室外智能驾驶竞速组</td>
         <td>国家级一等奖（全国第23名）</td>
+    </tr>
+    <tr>
+        <td>iGEM 2022 国际遗传工程机器设计大赛</td>
+        <td>金奖（国际最高奖）</td>
     </tr>
     <tr>
         <td>第六届物流技术（起重机）创意赛</td>
