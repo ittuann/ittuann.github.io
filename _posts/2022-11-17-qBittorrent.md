@@ -41,7 +41,7 @@ ssh进入群晖
 vim /etc/group
 ```
 
-vim内可以使用`/word`，在光标之下寻找第一个值为word的字符串。
+vim内可以使用`/word`，在光标之下寻找第一个值为word的字符串，区分大小写。
 
 我这里是`ptdownloader:x:65537:ptbox`  ，那么用户组ID就是65537
 
@@ -58,7 +58,9 @@ vim /etc/group
 
 
 
-于是只要在docker容器中添加环境变量 `PGID` - 65537 和 `PUID` - 1029 即可 ~
+于是只要在docker容器中添加环境变量 `PGID=65537`  和  `PUID=1029` 即可 ~
+
+也可以在环境变量里面修改下默认网页端口 `WEBUI_PORT=8780`  以及 `TZ=Asia/Shanghai`
 
 同理也可以用来管理transmission的权限，或是管理个人媒体服务器 jellyfin/emby 的权限。
 
