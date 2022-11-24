@@ -26,9 +26,9 @@ aside:
     ```
     https://dns.alidns.com/dns-query
     https://doh.pub/dns-query
+    # tcp://114.114.114.114
     # 223.5.5.5
     # 119.29.29.29
-    # tcp://114.114.114.114
     2400:3200::1
     2402:4e00::
     # OpenClash
