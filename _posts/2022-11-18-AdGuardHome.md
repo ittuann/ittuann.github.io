@@ -138,5 +138,7 @@ AdGuard Home 的过滤规则兼容 Adblock 语法、Hosts 语法及 Domain-only 
 参考链接
 
 > [AdGuard Home 安装及使用指北](https://sspai.com/post/63088)
+> 
 > [我有特别的 DNS 配置和使用技巧](https://blog.skk.moe/post/i-have-my-unique-dns-setup/)
+> 
 > [Blocklist Collection | Firebog](https://firebog.net/)

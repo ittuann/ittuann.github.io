@@ -33,9 +33,33 @@ qBittorrent的Docker是给了`PUID`和`PGID`的环境变量可以设置
 
 # 查看用户和用户组id
 
-ssh进入群晖
+Linux正常情况可以使用`id`命令来查看。群晖比较奇怪id命令返回的结果不对可能是因为魔改系统的原因。
 
-查看用户组ID
+查看当前用户组ID：
+
+```
+id -g
+```
+
+查看当前用户ID：
+
+```
+id -u
+```
+
+查看指定用户ID信息：
+
+```
+id ptdownloader
+```
+
+在Docker内使用`PGID=$(id -g)`  和  `PUID=$(id -u)`，就会使用启用Docker容器的那个用户的ID信息。
+
+
+
+至于群晖，首先SSH进入群晖
+
+查看用户组ID：
 
 ```shell
 vim /etc/group
@@ -47,7 +71,7 @@ vim内可以使用`/word`，在光标之下寻找第一个值为word的字符串
 
 
 
-查看用户ID
+查看用户ID：
 
 
 ```shell
