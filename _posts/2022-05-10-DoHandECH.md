@@ -1,6 +1,6 @@
 ---
 layout: article
-title: 记录下DoH配置
+title: 记录下DoH和ECH配置
 date: 2022-05-10
 key: P2022-05-10
 tags: ["Other"]
@@ -11,7 +11,7 @@ aside:
   toc: true
 ---
 
-做个备忘录，记录下主力设备 Win11、安卓、IOS、路由器、浏览器 配置 DoH(DNS-over HTTPS) 的过程
+做个备忘录，记录下主力设备 Win11、安卓、IOS、路由器、浏览器 配置 DoH(DNS-over HTTPS) 的过程。以及浏览器开启 Encrypted Client Hello (Secure SNI) 。
 
 <!--more-->
 
@@ -100,20 +100,32 @@ IOS15 在 `设置 - 通用 - 设备管理 - DNS` 启用
 
 Chrome: 设置 - 隐私设置和安全性 - 安全 - 使用安全DNS
 
+Firefox: 设置 - 常规 - 网络设置 - 设置 - 启用基于 HTTPS 的 DNS
+
+`Ctrl + R` 正常重加载
+
+`Ctrl + Shift + R` 硬性重加载
+
+按下`F12`进入调试后，右键地址栏左侧的刷新按钮，会出现 清空缓存并硬性重加载 。
+
+# ECH
+
+ECH 全称是 Encrypted Client Hello ，主要用于增强互联网连接的隐私保护。ECH 的核心是确保主机名不被暴露给互联网服务提供商、网络提供商和其它有能力监听网络流量的实体。
+
+## Chrome
+
 开启ECH: `chrome://flags/#encrypted-client-hello` 将 Encrypted ClientHello 设置为`Enabled`
 
-Firefox: 设置 - 常规 - 网络设置 - 设置 - 启用基于 HTTPS 的 DNS
+## Firefox
 
 开启ECH: 在 `about:config` 搜索条目 `network.dns.echconfig.enabled` 和 `network.dns.use_https_rr_as_altsvc`，将它们的设定改为 `true` 即可。
 
 在 `about:config` 中将 `network.trr.mode`设置为 `2`（默认是0），即优先使用用 TRR（也就是我们的 DNS over HTTPS），在解析失败时使用常规方式。也可以设置成`3`，强制 Firefox 使用 DoH。参见 https://wiki.mozilla.org/Trusted_Recursive_Resolver
 
-`Ctrl + Shift + R` 强制浏览器不使用页面缓存进行刷新
-
 # 检测是否正在使用DOH
 
-<https://1.1.1.1/help>
+<https://1.1.1.1/help/>
 
-<https://www.cloudflare.com/zh-cn/ssl/encrypted-sni>
+<https://www.cloudflare.com/zh-cn/ssl/encrypted-sni/>
 
 <https://crypto.cloudflare.com/cdn-cgi/trace/>

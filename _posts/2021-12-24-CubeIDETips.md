@@ -31,9 +31,9 @@ ST的STM32CubeIDE是基于Eclipse开发的。英飞凌的AURIX Studio和沁恒�
 
 # 快捷键
 
-在`Window > Preferences > General > Keys`可以修改快捷键设置。`Help > Show Active Keybindings...`
+在`Window > Preferences > General > Keys`可以修改快捷键设置。
 
-可以查看当前可用快捷键。
+在`Help > Show Active Keybindings...`可以查看当前可用快捷键。
 
 只列出了常用的几个。另外最好按习惯换一下两个搜索功能的默认快捷键。
 
@@ -43,6 +43,7 @@ ST的STM32CubeIDE是基于Eclipse开发的。英飞凌的AURIX Studio和沁恒�
 | Ctrl+Y       | 重做(撤回)                         |
 | Ctrl+Shift+Z | 重做(撤回)                         |
 | Alt+/        | 代码补全                           |
+| Ctrl+Shift+/ | 批量注释 /* */                     |
 | Ctrl+F       | 当前文件内搜索（Find and Replace） |
 | Ctrl+H       | 项目内搜索（Open Search Dialog）   |
 | F3           | 跳转到声明处                       |
@@ -148,3 +149,4 @@ CubeIDE本身不带有自动补全功能，需要 Alt+/  的快捷键才能显�
 参考链接：
 
 > [使用ST-LINK调试程序](https://blog.csdn.net/Naisu_kun/article/details/97393547)
+> [STM32CubeMonitor 介绍（二）例程二：实时波形检测](https://www.stmcu.org.cn/module/forum/forum.php?mod=viewthread&tid=626121)
