@@ -17,9 +17,50 @@ Windows 平台下的包管理器 Scoop & Winget
 
 # Scoop
 
+Scoop 官网 <https://scoop.sh/>
+
 Scoop 本身和 Scoop 安装过程参考的配置文件都是开源的，要安装什么一目了然。
 
-Scoop 命令的设计很简单，基本为「scoop + 动作 + 对象」的语法（其中「对象」是可省略的
+## 安装时的代理
+
+安装参考官网就可以。
+
+安装时可能会出现特色的网络问题，给PowerShelll挂上代理即可。
+
+- 配置临时环境变量：
+
+```shell
+$env:HTTP_PROXY="http://127.0.0.1:7890"
+$env:HTTPS_PROXY="https://127.0.0.1:7890"
+```
+
+这组命令将`HTTP_PROXY`和`HTTPS_PROXY`环境变量设置为指定的代理服务器。
+
+这种方法仅对当前PowerShell会话中运行的命令生效，不影响其他应用程序或Windows系统级别的代理设置。这些设置在PowerShell会话结束后将不再有效。
+
+（如果使用cmd的话则对应：
+
+```shell
+set http_proxy=http://127.0.0.1:7890
+```
+
+
+
+- 或是可以使用`netsh`工具来设置Windows系统级别的代理：
+
+```shell
+netsh winhttp show proxy				# 查看代理
+netsh winhttp set proxy 127.0.0.1:7890	# 设置代理
+netsh winhttp reset proxy				# 恢复默认取消代理（直连
+```
+
+这种方法会影响整个系统和所有支持使用系统代理设置的应用程序。这些设置将一直有效，直到手动更改或清除代理设置。
+
+
+
+## 语法
+
+Scoop 的命令非常语义化。它命令的设计很简单，基本为「scoop + 动作 + 对象」的语法（其中「对象」是可省略的
 
 最常用的几个基础动作：
 
@@ -45,9 +86,33 @@ Scoop 命令的设计很简单，基本为「scoop + 动作 + 对象」的语法
 scoop bucket add extras
 ```
 
+## 代理
+
+```shell
+# 使用代理
+set scoop_proxy=socks5://127.0.0.1:7890
+
+# 停止使用代理
+set scoop_proxy=
+```
+
+## 安装软件包
+
+```shell
+scoop update
+scoop cache clear
+scoop install jq
+```
+
+
+
 # Winget
 
-注意，Winget 第一次使用时会要求上传用户所在地的国家简写
+Winget是微软的Windows平台软件包管理器。现在应该是Win11都会自带了。
+
+安装的时候依旧会弹出界面，不会完全在CLI下安装。
+
+注意，Winget 第一次使用时会要求上传用户所在地的国家信息。
 
 ## 配置winget
 
@@ -74,12 +139,20 @@ winget --verbose-logs 将覆盖这一设置，并始终创建一个verbose日志
 
 ```json
     "logging": {
-            "level": "verbose"
+		"level": "verbose"
     },
 ```
 
+- 代理
+
+Winget配置代理同样可以使用上面提到的[环境变量](#安装时的代理)来进行配置。
+
 更多的参数，在Github文档有描述
 WinGet CLI Settings https://github.com/microsoft/winget-cli/blob/master/doc/Settings.md
+
+
+
+我个人其实更喜欢的是Scoop的概念。
 
 ---
 

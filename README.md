@@ -1,5 +1,17 @@
-Blog based on GitHub Pages.
+# Blog based on GitHub Pages
 
-<https://ittuann.netlify.app> (primary) and <https://ittuann.github.io> can both access the same content.
+<div align="left">
+
+[![GitHub Pages][github-image]][github-url]
+[![Netlify Status][netlify-image]][netlify-url]
+
+[github-image]: https://img.shields.io/github/deployments/ittuann/ittuann.github.io/github-pages?label=Build%20Status&logo=github
+[github-url]: https://ittuann.github.io
+[netlify-image]: https://api.netlify.com/api/v1/badges/aa5b77b1-724d-43cc-8856-c725bc5440f0/deploy-status
+[netlify-url]: https://ittuann.netlify.app
+
+</div>
+
+<https://ittuann.netlify.app> and <https://ittuann.github.io> can both access the same content.
 
 Thanks to the open source project [Jekyll](https://github.com/jekyll/jekyll) & [TeXt Theme](https://github.com/kitian616/jekyll-TeXt-theme) and their contributors.
