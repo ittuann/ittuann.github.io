@@ -36,7 +36,7 @@ timezone: Asia/Shanghai # see https://en.wikipedia.org/wiki/List_of_tz_database_
 author:
   type      : person # "person" (default), "organization"
   name      : ittuann
-  url       : ittuann.netlify.app
+  url       : ittuann.github.io
   avatar    : ./assets/avatar.png # path or url of avatar image (square)
   bio       : meow~
   email     : ittuann@outlook.com

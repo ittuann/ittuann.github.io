@@ -31,7 +31,7 @@ show_author_profile: false
 
 Hi there🎉
 
- [![CurriculumVitae](https://img.shields.io/badge/-Résumé-informational?style=for-the-badge&logo=BookStack&logoColor=white&link=https://baiqilu.netlify.app)](https://baiqilu.netlify.app)  [![Github](https://img.shields.io/badge/-Github-181717?style=for-the-badge&logo=Github&logoColor=white&link=https://github.com/ittuann)](https://github.com/ittuann) [![Email](https://img.shields.io/badge/-ittuann@outlook.com-c5221f?style=for-the-badge&logo=Gmail&logoColor=white&link=mailto:ittuann@outlook.com)](mailto:ittuann@outlook.com) 
+ [![CurriculumVitae](https://img.shields.io/badge/-Résumé-informational?style=for-the-badge&logo=BookStack&logoColor=white&link=https://baiqilu.netlify.app)](https://baiqilu.netlify.app)  [![Github](https://img.shields.io/badge/-Github-181717?style=for-the-badge&logo=Github&logoColor=white&link=https://github.com/ittuann)](https://github.com/ittuann) [![Email](https://img.shields.io/badge/-ittuann@outlook.com-c5221f?style=for-the-badge&logo=Gmail&logoColor=white&link=mailto:ittuann@outlook.com)](mailto:ittuann@outlook.com)
 
 博客的核心还是内容。等到能够有一定程度的产出再迁移到独立博客 Typecho / WordPress 平台吧~
 
@@ -75,6 +75,10 @@ Hi there🎉
         <td>国家级二等奖</td>
     </tr>
     <tr>
+        <td>中国机器人大赛暨RoboCup机器人世界杯中国赛</td>
+        <td>国家级三等奖</td>
+    </tr>
+    <tr>
         <td>第十一届中国教育机器人大赛</td>
         <td>国家级三等奖</td>
     </tr>
@@ -83,7 +87,7 @@ Hi there🎉
         <td>省级一等奖</td>
     </tr>
     <tr>
-        <td>第十三届蓝桥杯C/C++程序设计A组</td>
+        <td>第十三届蓝桥杯 C/C++ 程序设计A组</td>
         <td>省级一等奖</td>
     </tr>
 </table>
@@ -94,7 +98,7 @@ Hi there🎉
         <th>详情</th>
     </tr>
     <tr>
-        <td>基于计算机视觉的物流分拣AVG（2022）</td>
+        <td>基于计算机视觉的物流分拣AVG (No.202210225389)</td>
         <td>国家级大学生创新训练计划项目</td>
     </tr>
     <tr>
