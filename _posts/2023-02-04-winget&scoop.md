@@ -11,7 +11,7 @@ aside:
   toc: true
 ---
 
-Windows 平台下的包管理器 Scoop & Winget
+Windows 平台下的包管理器 Scoop, Chocolatey,  Winget. 使用下来我个人其实更喜欢的是 Scoop 的理念。
 
 <!--more-->
 
@@ -106,6 +106,16 @@ scoop install jq
 
 
 
+# Chocolatey
+
+官网: <https://chocolatey.org>
+
+choco的好处就是收录的软件更多。
+
+我个人其实更喜欢的是 Scoop 的理念。
+
+
+
 # Winget
 
 Winget是微软的Windows平台软件包管理器。现在应该是Win11都会自带了。
@@ -152,7 +162,13 @@ WinGet CLI Settings https://github.com/microsoft/winget-cli/blob/master/doc/Sett
 
 
 
-我个人其实更喜欢的是Scoop的概念。
+# WingetUI
+
+<https://github.com/marticliment/WingetUI>
+
+这是个很棒的软件。它能够为常见的 CLI 包管理器（如 Winget、Scoop 和 Chocolatey）创建一个直观的 GUI。通过这个应用，可以轻松地下载、安装、更新和卸载任何支持包管理器发布的软件，以及更多功能。
+
+
 
 ---
 
