@@ -23,6 +23,8 @@ aside:
 netstat -ano | findstr 7890
 ```
 
+并且用 微软的 Sysinternals 里面的 TCPView 和 Process Explorer 工具，也查找不到是哪个软件占用了这个端口。
+
 这个问题已经有一阵子了，不过每次都是重启就可以解决也就没找修复的方案。后来在网页开发的时候提示占用端口，这就不能忍了。在网上找了一大圈子终于找到了解决办法。 <https://github.com/shadowsocks/shadowsocks-windows/issues/2171#issuecomment-603119696>
 
 运行一下

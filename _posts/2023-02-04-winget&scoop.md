@@ -3,7 +3,7 @@ layout: article
 title: Windows包管理器Scoop&Winget
 date: 2023-02-04
 key: P2023-02-04
-tags: ["Others"]
+tags: ["Other"]
 show_author_profile: false
 comment: true
 sharing: true
@@ -27,7 +27,7 @@ Scoop 本身和 Scoop 安装过程参考的配置文件都是开源的，要安�
 
 安装时可能会出现特色的网络问题，给PowerShelll挂上代理即可。但是PowerShelll原生并不支持socks5代理。
 
-## 将SOCKS5代理转换为HTTP代理
+### 可选：将SOCKS5代理转换为HTTP代理
 
 需要用到额外的第三方软件 **Privoxy** https://www.privoxy.org/
 
@@ -36,20 +36,24 @@ Privoxy 是一个跨平台的非缓存的 Web 代理软件，它可以用来修�
 安装完成后，修改 C:\Program Files (x86)\Privoxy\config.txt 配置文件。在文件的最后追加
 
 ```
-forward-socks5 / 127.0.0.1:7890 .
+forward-socks5 / 127.0.0.1:3389 .
 ```
 
 注意这一行里面有`/`和`.`不要忘记输入了
 
 在 Privoxy 默认的配置文件中已经设置了 `listen-address  127.0.0.1:8118` 表示监听的端口为本地8118端口。
 
-配置完成后重启Privoxy即可
+配置完成后重启Privoxy即可。然后本地8118端口即为HTTP代理。
+
+另外，如果用Clash的情况是不需要额外把SOCKS5代理转换为HTTP代理的。
+
+然后继续配置代理：
 
 - 配置临时环境变量：
 
 ```shell
-$env:HTTP_PROXY="http://127.0.0.1:8118"
-$env:HTTPS_PROXY="https://127.0.0.1:8118"
+$env:HTTP_PROXY="http://127.0.0.1:7890"
+$env:HTTPS_PROXY="http://127.0.0.1:7890"
 ```
 
 这组命令将`HTTP_PROXY`和`HTTPS_PROXY`环境变量设置为指定的代理服务器。
@@ -59,7 +63,9 @@ $env:HTTPS_PROXY="https://127.0.0.1:8118"
 （如果使用cmd的话则对应：
 
 ```shell
-set http_proxy=http://127.0.0.1:8118
+set http_proxy=http://127.0.0.1:7890
+set https_proxy=http://127.0.0.1:7890
+set all_proxy=socks5://127.0.0.1:7890
 ```
 
 验证代理是否配置成功
@@ -72,7 +78,7 @@ curl https://www.google.com/
 
 ```shell
 netsh winhttp show proxy				# 查看代理
-netsh winhttp set proxy 127.0.0.1:8118	# 设置代理
+netsh winhttp set proxy 127.0.0.1:7890	# 设置代理
 netsh winhttp reset proxy				# 恢复默认取消代理（直连
 ```
 
