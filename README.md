@@ -12,6 +12,8 @@
 
 </div>
 
-<https://ittuann.netlify.app> and <https://ittuann.github.io> can both access the same content.
+Visit the page: <https://ittuann.github.io>
+
+Web Netlify mirror: <https://ittuann.netlify.app>
 
 Thanks to the open source project [Jekyll](https://github.com/jekyll/jekyll) & [TeXt Theme](https://github.com/kitian616/jekyll-TeXt-theme) and their contributors.
