@@ -37,7 +37,7 @@ Hi there🎉
 
 站点建设的初衷是作笔记同时再分享些东西。不过当前的内容咸鱼的很，还有很多想做的东西和想写的内容没有弄上来，有待完善！
 
-目前 <https://ittuann.netlify.app>  和 <https://ittuann.github.io> 均可访问博客，内容完全相同。
+博客基于Github Pages <https://ittuann.github.io> 。网站也有 Netlify 镜像: <https://ittuann.netlify.app>  和 Vercel 镜像: <https://ittuann.vercel.app>
 
 ------
 
