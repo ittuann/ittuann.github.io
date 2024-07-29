@@ -15,6 +15,10 @@ aside:
 
 <!--more-->
 
+国内的DNS服务商中，目前只有阿里支持ipv4和ipv6的DoH。可以分别通过`dig AAAA dns.alidns.com`和`dig A dns.alidns.com`测试。
+
+
+
 # Windows11
 
 设置 - 网络和Internet - WLAN - 硬件属性 \- DNS服务器分配
@@ -62,8 +66,14 @@ Add-DnsClientDohServerAddress -ServerAddress '<resolver-IP-address>' -DohTemplat
 用 netsh 举例 （添加的时候需要管理员权限
 
 ```
-netsh dns add encryption server=223.5.5.5 dohtemplate=https://dns.alidns.com/dns-query autoupgrade=no udpfallback=no
-netsh dns add encryption server=119.29.29.29 dohtemplate=https://doh.pub/dns-query autoupgrade=no udpfallback=no
+# Alidns
+netsh dns add encryption server=223.5.5.5 dohtemplate=https://dns.alidns.com/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=2400:3200::1 dohtemplate=https://dns.alidns.com/dns-query autoupgrade=yes udpfallback=no
+# Tencent
+netsh dns add encryption server=119.29.29.29 dohtemplate=https://doh.pub/dns-query autoupgrade=yes udpfallback=no
+# Quad101
+netsh dns add encryption server=101.101.101.101 dohtemplate=https://dns.twnic.tw/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=2001:de4::101 dohtemplate=https://dns.twnic.tw/dns-query autoupgrade=yes udpfallback=no
 ```
 
 # Android
@@ -108,6 +118,14 @@ Firefox: 设置 - 常规 - 网络设置 - 设置 - 启用基于 HTTPS 的 DNS
 
 按下`F12`进入调试后，右键地址栏左侧的刷新按钮，会出现 清空缓存并硬性重加载 。
 
+# 检测是否正在使用DOH
+
+<https://www.cloudflare.com/zh-cn/ssl/encrypted-sni/>
+
+<https://1.1.1.1/help/>
+
+<https://crypto.cloudflare.com/cdn-cgi/trace/>
+
 # ECH
 
 ECH 全称是 Encrypted Client Hello ，主要用于增强互联网连接的隐私保护。ECH 的核心是确保主机名不被暴露给互联网服务提供商、网络提供商和其它有能力监听网络流量的实体。
@@ -121,11 +139,3 @@ ECH 全称是 Encrypted Client Hello ，主要用于增强互联网连接的隐�
 开启ECH: 在 `about:config` 搜索条目 `network.dns.echconfig.enabled` 和 `network.dns.use_https_rr_as_altsvc`，将它们的设定改为 `true` 即可。
 
 在 `about:config` 中将 `network.trr.mode`设置为 `2`（默认是0），即优先使用用 TRR（也就是我们的 DNS over HTTPS），在解析失败时使用常规方式。也可以设置成`3`，强制 Firefox 使用 DoH。参见 https://wiki.mozilla.org/Trusted_Recursive_Resolver
-
-# 检测是否正在使用DOH
-
-<https://1.1.1.1/help/>
-
-<https://www.cloudflare.com/zh-cn/ssl/encrypted-sni/>
-
-<https://crypto.cloudflare.com/cdn-cgi/trace/>
