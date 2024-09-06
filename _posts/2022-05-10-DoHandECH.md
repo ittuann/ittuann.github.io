@@ -17,8 +17,6 @@ aside:
 
 国内的DNS服务商中，目前只有阿里支持ipv4和ipv6的DoH。可以分别通过`dig AAAA dns.alidns.com`和`dig A dns.alidns.com`测试。
 
-
-
 # Windows11
 
 设置 - 网络和Internet - WLAN - 硬件属性 \- DNS服务器分配
@@ -59,7 +57,7 @@ netsh dns add encryption server=[resolver-IP-address] dohtemplate=[resolver-DoH-
 Add-DnsClientDohServerAddress -ServerAddress '<resolver-IP-address>' -DohTemplate '<resolver-DoH-template>' -AllowFallbackToUdp $False -AutoUpgrade $False
 ```
 
-`autoupgrade `  是 自动升级，意思是当使用这个dns的时会自动启用DoH
+`autoupgrade ` 是 自动升级，意思是当使用这个dns的时会自动启用DoH
 
 另外也可以直接去编辑注册表添加或是用组策略
 

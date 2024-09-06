@@ -37,8 +37,6 @@ float Cof =  = 1.0 / (1.0 + (1.0 / 2Pi * T(s) * fc));
 
 上面是cof的计算公式。但一阶 RC 低通滤波在实际情况也可以不按照公式计算的结果，用上位机比较原始值和滤波后数值波形来试凑出来一版系数也是可行的。
 
-
-
 # 二阶 IIR 低通滤波
 
 ## IIR 滤波公式：
@@ -103,8 +101,6 @@ lpf->FilterData[0] = (lpf->B[0] * lpf->OriginData[0] + lpf->B[1] * lpf->OriginDa
 
 ## 滤波系数的计算：
 
-
-
 ```c
 /**
  * @brief	二阶 IIR 低通滤波
@@ -114,17 +110,17 @@ void AccLowpassIIR2Filter_E(void)
 {
 	const float sample_freq = 500;
 	const float _cutoff_freq = 200;
-	
+
 	const float fr = sample_freq / _cutoff_freq;
 	const float ohm = tanf(M_PI_F / fr);
 	const float c = 1.0f + 2.0f * cosf(M_PI_F / 4.0f) * ohm + ohm * ohm;
-	
+
 	const float _b0 = ohm * ohm / c;
 	const float _b1 = 2.0f * _b0;
 	const float _b2 = _b0;
 	const float _a1 = 2.0f * (ohm * ohm - 1.0f) / c;
 	const float _a2 = (1.0f - 2.0f * cosf(M_PI_F / 4.0f) * ohm +ohm * ohm) / c;
-	
+
 //	lFilter[0] = Origin[0] * _b0 + Origin[1] * _b1 + Origin[2] * _b2 - Filter[1] * _a1 - Filter[2] * _a2;
 }
 ```
@@ -148,7 +144,6 @@ void AccLowpassIIR2Filter_E(void)
 - 最后在菜单栏点击编辑（edit）→转换为二节点（Convert to Single Section），即是我们最终用的滤波器系数。在MATLAB里，IIR公式中的ab又分别叫做分子（Numerator）和分母（Denominator）。
 - 左边实现模型（Realize Model）还可以生成Simulink模型进行仿真。
 
-
 # 五阶 FIR 低通滤波
 
 ## FIR 滤波公式：
@@ -167,7 +162,7 @@ FIR滤波就是这个个方程。x(n)为输入信号，k(n)为FIR滤波系数，
 void FIR5Filter(void)
 {
 	const float H[ORDER + 1] = {...};
-	
+
     Filter[0] = 0;
     for (uint16_t j = 0; j < ORDER + 1; j++) {
          Filter[0] += H[j] * Origin[j];
@@ -175,16 +170,12 @@ void FIR5Filter(void)
 }
 ```
 
-
-
 ## 滤波系数的计算：
 
 - FIR滤波器设计方法有多种，如图4所示，最常用的是窗函数设计法（Window）、等波纹设计法（Equiripple）和最小二乘法 （Least-Squares）等。
 
 - 设置频率响应的参数，包括采样频率Fs、通带频率Fpass和阻带频率Fstop
 - 可以使用ARM官方DSP库实现FIR和IIR滤波，提高运行速度和效率。
-
-
 
 # 卡尔曼滤波
 
@@ -245,7 +236,6 @@ float kalman1_filter(kalman1_filter_t *state, float z_measure)
 ```
 
 - 一维卡尔曼滤波全部是标量计算
-
 
 - R固定，Q越大，代表越信任侧量值，Q无穷代表只用测量值(Q/R取0无意义)Q/R决定了滤波器的稳态频率响
 

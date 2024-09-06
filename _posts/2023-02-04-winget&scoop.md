@@ -11,7 +11,7 @@ aside:
   toc: true
 ---
 
-Windows 平台下的包管理器 Scoop, Chocolatey,  Winget. 使用下来我个人其实更喜欢的是 Scoop 的理念。
+Windows 平台下的包管理器 Scoop, Chocolatey, Winget. 使用下来我个人其实更喜欢的是 Scoop 的理念。
 
 <!--more-->
 
@@ -84,8 +84,6 @@ netsh winhttp reset proxy				# 恢复默认取消代理（直连
 
 这种方法会影响整个系统和所有支持使用系统代理设置的应用程序。这些设置将一直有效，直到手动更改或清除代理设置。
 
-
-
 ## 语法
 
 Scoop 的命令非常语义化。它命令的设计很简单，基本为「scoop + 动作 + 对象」的语法（其中「对象」是可省略的
@@ -106,7 +104,7 @@ Scoop 的命令非常语义化。它命令的设计很简单，基本为「scoop
 
 ## 配置软件仓库
 
- Scoop 默认软件仓库（main bucket），收录条件比较严格和苛刻，其中一条就是不可以有 GUI。所以为了日常方便使用，可以添加其他的bucket
+Scoop 默认软件仓库（main bucket），收录条件比较严格和苛刻，其中一条就是不可以有 GUI。所以为了日常方便使用，可以添加其他的bucket
 
 添加extras这个 bucket。地址: https://github.com/ScoopInstaller/Extras/tree/master/bucket
 
@@ -132,8 +130,6 @@ scoop cache clear
 scoop install jq
 ```
 
-
-
 # Chocolatey
 
 官网: <https://chocolatey.org>
@@ -141,8 +137,6 @@ scoop install jq
 choco的好处就是收录的软件更多。
 
 我个人其实更喜欢的是 Scoop 的理念。
-
-
 
 # Winget
 
@@ -188,15 +182,11 @@ Winget配置代理同样可以使用上面提到的[环境变量](#安装时的�
 更多的参数，在Github文档有描述
 WinGet CLI Settings https://github.com/microsoft/winget-cli/blob/master/doc/Settings.md
 
-
-
 # WingetUI
 
 <https://github.com/marticliment/WingetUI>
 
 这是个很棒的软件。它能够为常见的 CLI 包管理器（如 Winget、Scoop 和 Chocolatey）创建一个直观的 GUI。通过这个应用，可以轻松地下载、安装、更新和卸载任何支持包管理器发布的软件，以及更多功能。
-
-
 
 ---
 

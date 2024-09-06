@@ -3,7 +3,7 @@ layout: article
 title: 智能车电机系统辨识和PID仿真自动调参
 date: 2021-08-29
 key: P2021-08-29-3
-tags: ["智能车","PID"]
+tags: ["智能车", "PID"]
 show_author_profile: true
 comment: true
 sharing: true
@@ -129,8 +129,6 @@ aside:
 ## 其他
 
 其实PID Tuner出来的参数直接就已经是可以用的程度了。另外仿真也可以给出一个大概的参数范围，在这个结果上依据实际情况再修改参数，也会有更好的效果。我们最终在国赛时四个电机的速度环，就是在仿真出的参数的基础上调了一个小时左右就最终确定了的。
-
-
 
 > 参考资料：
 >

@@ -84,8 +84,6 @@ $ ssh -T git@github.com
 > Hi USERNAME! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
-
-
 参考链接：
 
 > Using SSH over the HTTPS port https://docs.github.com/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port

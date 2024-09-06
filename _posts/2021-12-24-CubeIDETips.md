@@ -3,7 +3,7 @@ layout: article
 title: STM32CubeIDE的一点使用技巧
 date: 2021-12-24
 key: P2021-12-24-1
-tags: ["STM32","RoboMaster"]
+tags: ["STM32", "RoboMaster"]
 show_author_profile: true
 comment: true
 sharing: true
@@ -21,13 +21,9 @@ ST的STM32CubeIDE是基于Eclipse开发的。英飞凌的AURIX Studio和沁恒�
 
 像Embedded Studio这样的新型IDE还没来得及去尝试。网页版的Keil Studio颜值上来了但还没有离线版如果作为长期使用的IDE现阶段多少有些不放心。另外微软官方也下场制作了Visual Studio 2022和VSCode的方案。相信之后选择会越来越多样的。
 
-
-
 22.03.13 好家伙MDK推出了个人免费使用版本，只要不是用于商用随便用。登录领license。 <https://www.keil.arm.com/mdk-community/>
 
 另外发现MDK和Keil Studio现在也支持相互导入了。
-
-
 
 # 快捷键
 
@@ -43,13 +39,11 @@ ST的STM32CubeIDE是基于Eclipse开发的。英飞凌的AURIX Studio和沁恒�
 | Ctrl+Y       | 重做(撤回)                         |
 | Ctrl+Shift+Z | 重做(撤回)                         |
 | Alt+/        | 代码补全                           |
-| Ctrl+Shift+/ | 批量注释 /* */                     |
+| Ctrl+Shift+/ | 批量注释 /\* \*/                   |
 | Ctrl+F       | 当前文件内搜索（Find and Replace） |
 | Ctrl+H       | 项目内搜索（Open Search Dialog）   |
 | F3           | 跳转到声明处                       |
 | F11          | 启动调试                           |
-
-
 
 # 更好的SWV调试支持
 
@@ -59,14 +53,11 @@ SW调试又称SWD，还有一种不太常见但是功能更丰富的SWV调试。
 
 CubeIDE对SWV仿真的支持比Keil要好些。
 
-
 SWV支持的扩展功能有很多。向控制台输出信息；变量追踪和绘制；函数耗时占比统计；异常与中断追踪；SWV追踪日志；RTOS实时状态查看
 
 这篇文章还蛮不错的 博客配图不方便我就不再写了（逃 <https://blog.csdn.net/Naisu_kun/article/details/97393547>
 
 另外说一下，正版的ST-LINK V2是不支持给开发板供电的。T_VCC是官方ST-LINK特有的引脚，需要将MCU电源连接至该引脚，而没有供电功能。反而是长得像U盘一样的盗版下载器可以直接供电。
-
-
 
 # 两种编译配置：Release和Debug
 
@@ -75,8 +66,6 @@ CubeIDE在编译是会有两个可选项，Release和Debug，这两个其实就�
 比如我想在测试的时候使用-O0优化，而在正式发布程序的时候希望以-O3优化来运行。这样可以在调试时有较好的体验，而正式发布时也有些许的速度提速。
 
 或者是我要在调试的时候多收集信息和数据，而在正式发布时想要精简体积。这样只需要给这两个配置不同的全局宏定义。比如配置宏定义Test_Mode在Debug配置下为0在Release下为1，并使用预编译`#if Test_Mode`的方式即可完成这个场景。
-
-
 
 # 全局宏定义&添加引用新文件
 
@@ -88,8 +77,6 @@ CubeIDE在编译是会有两个可选项，Release和Debug，这两个其实就�
 
 - 注意有两种编译配置，依情况可能都需要修改
 
-  
-
 # 启用assert_param函数
 
 assert_param函数用来检查用户输入参数是否正确。HAL库中的函数大多内部都有assert_param函数。默认时assert_param没有启用。
@@ -100,21 +87,15 @@ assert_param函数用来检查用户输入参数是否正确。HAL库中的函�
 
 方法就是在项目Debug编译配置中的全局宏定义，添加 `USE_FULL_ASSERT= 1U`
 
-
-
 # 字体相关
 
 - 显示简体中文：右键项目选择`Prorerties` ，然后在弹出的窗口选择`Resource`，修改`Text file encoding`为`Other：GBK`。GBK不在下拉列表的选项中的话直接打字上去也是可以的。
 - 更换字体：`Window > Preferences > General > Apperance > Colors and Fonts`选择`Bsaic > Text Fonts`再点击右侧Edit...即可更换。我在使用的字体是更纱黑体Sarasa Mono HC 12
 - 修复中文字体大小异常：再上面更换字体的窗口，将脚注选择为“中欧字符”即可
 
-
-
 # 自动补全
 
-CubeIDE本身不带有自动补全功能，需要 Alt+/  的快捷键才能显示代码补全框。但毕竟基于Eclipse也是有插件能解决的。自动补全也是我体感CubeIDE优于Keil的地方。具体的方法直接在搜索引擎搜索”STM32CubeIDE 自动补全“就能找到解决教程。注意不同的IDE版本可能有些许差别。
-
-
+CubeIDE本身不带有自动补全功能，需要 Alt+/ 的快捷键才能显示代码补全框。但毕竟基于Eclipse也是有插件能解决的。自动补全也是我体感CubeIDE优于Keil的地方。具体的方法直接在搜索引擎搜索”STM32CubeIDE 自动补全“就能找到解决教程。注意不同的IDE版本可能有些许差别。
 
 # 杂项
 
@@ -134,19 +115,18 @@ CubeIDE本身不带有自动补全功能，需要 Alt+/  的快捷键才能显�
 
 - 修改ROM起始地址
 
-  修改`STM32F407IGHX_FLASH.ld`中`FLASH    (rx)    : ORIGIN = 0x8000000` 
+  修改`STM32F407IGHX_FLASH.ld`中`FLASH    (rx)    : ORIGIN = 0x8000000`
 
 - 开启串口重定向printf的浮点数支持
 
-  默认下printf只能输出整形。右键项目选择`Prorerties` ，在弹出窗口的 `C/C++ Build > Settings > Tool Settings > MCU Settings` ，勾选`Use float with printf from newlib-nano (-u_printf float)` 
+  默认下printf只能输出整形。右键项目选择`Prorerties` ，在弹出窗口的 `C/C++ Build > Settings > Tool Settings > MCU Settings` ，勾选`Use float with printf from newlib-nano (-u_printf float)`
 
 - 另外可以看下稚晖军写的配置CLion用于STM32开发 <https://zhuanlan.zhihu.com/p/145801160>
 
-
-
-------
+---
 
 参考链接：
 
 > [使用ST-LINK调试程序](https://blog.csdn.net/Naisu_kun/article/details/97393547)
+
 > [STM32CubeMonitor 介绍（二）例程二：实时波形检测](https://www.stmcu.org.cn/module/forum/forum.php?mod=viewthread&tid=626121)

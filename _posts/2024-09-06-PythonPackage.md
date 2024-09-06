@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Github Copilot 使用场景
+title: 解析 Python 是如何找包的
 date: 2024-09-06
 key: P2024-09-06
 tags: Python
@@ -130,7 +130,7 @@ $ python main.py
 ['/home/ittuann/test_path', ...]  # 省略的路径是共同的，与讨论的问题无关
 I'm a
 ['/home/ittuann/test_path', ...]
-$ 
+$
 $ python my_package/a.py
 I'm a
 ['/home/ittuann/test_path/my_package', ...]
@@ -169,7 +169,7 @@ Traceback (most recent call last):
   File "/home/ittuann/test_path/my_package/a.py", line 5, in <module>
     import b
 ModuleNotFoundError: No module named 'b'
-$ 
+$
 $ python my_package/a.py
 I'm a
 ['/home/ittuann/test_path/my_package', ...]
@@ -262,8 +262,6 @@ I'm b
 以模块方式运行脚本，可以帮助实现导入路径的一致性，从而避免相对导入和路径问题。无论脚本被放置在项目的哪个位置，导入时都会基于项目的根目录进行，而不是基于脚本所在的目录。
 
 这也是为什么 Django 官方文档中推荐导入名称全部用 `myapp.models.users` 这种形式，导入都是从项目的根目录开始的。这种导入方式不依赖于文件在项目中的位置。好处是无论你在项目的哪个文件中，都可以使用相同的导入语句来引用同一个模块，特别是在复杂和层次分明的项目中能减少由于文件移动或重构导致的导入错误。
-
-
 
 参考链接:
 

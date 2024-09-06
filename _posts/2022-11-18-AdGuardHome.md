@@ -15,7 +15,7 @@ aside:
 
 <!--more-->
 
-环境为 OpenWrt 内核5.4.190  AdGuard Home v0.107.18
+环境为 OpenWrt 内核5.4.190 AdGuard Home v0.107.18
 
 # DNS 设置
 
@@ -23,19 +23,19 @@ aside:
 
 - 上游DNS服务器
 
-    ```
-    https://dns.alidns.com/dns-query
-    https://doh.pub/dns-query
-    # tcp://114.114.114.114
-    # 223.5.5.5
-    # 119.29.29.29
-    2400:3200::1
-    2402:4e00::
-    # OpenClash
-    # 127.0.0.1:7874
-    ```
+  ```
+  https://dns.alidns.com/dns-query
+  https://doh.pub/dns-query
+  # tcp://114.114.114.114
+  # 223.5.5.5
+  # 119.29.29.29
+  2400:3200::1
+  2402:4e00::
+  # OpenClash
+  # 127.0.0.1:7874
+  ```
 
-    使用了`并行请求`
+  使用了`并行请求`
 
 - Bootstrap DNS 服务器
 
@@ -45,8 +45,6 @@ aside:
   2400:3200::1
   2402:4e00::
   ```
-
-  
 
 # 过滤器 - DNS拦截列表
 
@@ -108,14 +106,12 @@ AdGuard Home 的过滤规则兼容 Adblock 语法、Hosts 语法及 Domain-only 
 
 | **语法**                | **作用**                                  |
 | ----------------------- | ----------------------------------------- |
-| `||example.org^`        | 拦截 example.org 域名及其所有子域名       |
-| `@@||example.org^`      | 放行 example.org 及其所有子域名           |
+| `\|\|example.org^`      | 拦截 example.org 域名及其所有子域名       |
+| `@@\|\|example.org^`    | 放行 example.org 及其所有子域名           |
 | `127.0.0.1 example.org` | 将 example.org 解析到 127.0.0.1           |
 | `/REGEX/`               | 阻止访问与 example_regex_meaning 匹配的域 |
 | `! 这是一行注释`        | 只是一条注释                              |
 | `# 这是一行注释`        | 只是一条注释                              |
-
-
 
 # 其他设置
 
@@ -125,20 +121,16 @@ AdGuard Home 的过滤规则兼容 Adblock 语法、Hosts 语法及 Domain-only 
 
 重定向 - 作为dnsmasq的上游服务器
 
-在关机时备份工作目录文件 -  `filters`、`stats.db`、`sessions.db`
+在关机时备份工作目录文件 - `filters`、`stats.db`、`sessions.db`
 
-系统升级时保留文件 -  `配置文件`、`0sessions.db`、`stats.db`、`filters`
+系统升级时保留文件 - `配置文件`、`0sessions.db`、`stats.db`、`filters`
 
-计划任务 - 自动更新ipv6主机并重启adh 
-
-
-
-
+计划任务 - 自动更新ipv6主机并重启adh
 
 参考链接
 
 > [AdGuard Home 安装及使用指北](https://sspai.com/post/63088)
-> 
+>
 > [我有特别的 DNS 配置和使用技巧](https://blog.skk.moe/post/i-have-my-unique-dns-setup/)
-> 
+>
 > [Blocklist Collection | Firebog](https://firebog.net/)

@@ -3,7 +3,7 @@ layout: article
 title: 探索FreeRTOS的一些功能和用法
 date: 2021-12-25
 key: P2021-12-25-3
-tags: ["STM32","RoboMaster"]
+tags: ["STM32", "RoboMaster"]
 show_author_profile: true
 comment: true
 sharing: true
@@ -32,10 +32,10 @@ aside:
   ```c
   osThreadId testHandle;					// 定义线程的ID，用于对线程的各种操作（如修改优先级，中止/开始线程等
   void TestTask(void const * argument);	// 线程对应的函数体的声明
-  
+
   osThreadDef(test, TestTask, osPriorityBelowNormal, 0, 256);	// 线程定义，参数分别为：线程的名称，线程函数体，线程优先级，线程实例化个数，线程分配的栈空间
   testHandle = osThreadCreate(osThread(test), NULL);			// 创建线程，并赋值给对应的线程ID
-  
+
   // 线程的具体实现
   __weak void TestTask(void const * argument)
   {
@@ -49,7 +49,7 @@ aside:
   }
   ```
 
-- CubeMX在配置FreeRTOS时默认使用与HAL库相同的SysTick滴答定时器。为了避免时钟线混乱冲突，需要在System Core-SYS-Timebase Source选择一个其他的定时器。***一定注意要切换时钟源！***
+- CubeMX在配置FreeRTOS时默认使用与HAL库相同的SysTick滴答定时器。为了避免时钟线混乱冲突，需要在System Core-SYS-Timebase Source选择一个其他的定时器。**_一定注意要切换时钟源！_**
 
   STM32的TIM分为高级定时器、通用定时器和基本定时器。其中基本定时器的功能最简单，只有定时的功能，一般用作时钟基源；通用定时器在基本的定时功能的基础上多出了输出比较和输入捕获功能。输出比较可以输出周期性的方波（比如PWM波和PPM波），输入捕获可以读取输入信号的高电平和低电平的时间进而可以计算出信号的周期和占空比；高级定时器除了上述功能之外，还有还包含无互补信号输出以及带刹车(断路)功能等电机控制~~（日常用不太到的）~~高级功能
 
@@ -107,7 +107,7 @@ void MessageQueueCreate(void)
 - 创建队列API函数是`xQueueCreate()`，但其实这是一个宏。真正被执行的函数是`xQueueGenericCreate()`
 - 程序中演示了给存放电机数据的结构体指针，以及存放欧拉角的数组angle[3]创建消息队列
 - 自己写的这个`MessageQueueCreate()`函数需添加至`MX_FREERTOS_Init`中初始化。
-- 建议设置一个消息队列创建成功的标志位。这样可以避免中断在消息队列完成创建前写入数据导致程序卡死。 
+- 建议设置一个消息队列创建成功的标志位。这样可以避免中断在消息队列完成创建前写入数据导致程序卡死。
 - 消息队列创建失败可能是由于 heap 堆栈空间不够
 
 ## 消息发送
@@ -119,7 +119,7 @@ void MessageQueueCreate(void)
   所有的xQueueSend都是一个宏，实际执行函数为`xQueueGenericSend()`。后缀为`FromISR`的实际执行函数为`xQueueGenericSendFromISR()`
 
   ```c
-  BaseType_t xQueueGenericSend ( 
+  BaseType_t xQueueGenericSend (
       QueueHandle_t xQueue,				// 队列句柄
       const void * const pvItemToQueue,	// 指针，指向要入队的项目
       TickType_t xTicksToWait,			// 如果队列满，等待队列空闲的最大时间
@@ -138,7 +138,7 @@ void MessageQueueCreate(void)
 - `xQueueOverwrite`
 
   向队列尾部发送一个队列消息。中断版本为`xQueueSendOverwriteFromISR () `
-  
+
 - `uxQueueMessagesWaiting`
 
   返回队列中当前有效数据单元个数。中断版本为`uxQueueMessagesWaitingFromISR()`
@@ -198,12 +198,12 @@ xQueueReceive(messageQueue, &useData, (1 / portTICK_RATE_MS));
 - `vTaskDelayUntil()`为绝对延时。绝对延时能够提供精度更高的定时效果。
 
   延时的时间单位为系统节拍时钟周期。如果1节拍不是1ms或是想要规范标准化代码可以使用`5 / portTICK_RATE_MS`或`pdMS_TO_TICKS(5UL)`
-  
-  ***如果是需要周期运行的任务程序（比如电机PID控制），最好用绝对延时替换相对延时保证任务运行精确***
+
+  **_如果是需要周期运行的任务程序（比如电机PID控制），最好用绝对延时替换相对延时保证任务运行精确_**
 
 ```c
 void TestTask(void const * argument)
-{	
+{
 	portTickType xLastWakeTime;
 	const portTickType xFrequency = pdMS_TO_TICKS(5UL);		// 绝对延时5ms
 	xLastWakeTime = xTaskGetTickCount();					// 用当前tick时间初始化 pxPreviousWakeTime
@@ -222,13 +222,11 @@ void TestTask(void const * argument)
 - FreeRTOS的信号量包括二进制信号量、计数信号量、互斥信号量（互斥量）和递归互斥信号量（递归互斥量）。
 - 互斥量和信号量使用相同的 API 函数，都直接或间接调用通用队列创建函数xQueueGenericCreate()来实现。
 
-
 - 互斥量和信号量在用法上不同。
   - 互斥量和递归互斥量可以看成特殊的信号量。
   - 信号量用于任务间同步或者任务和中断间同步；互斥量用于互锁，用于保护同时只能有一个任务访问的资源，为资源上一把锁。
   - 信号量用于同步时，一般是一个任务（或中断）给出信号，另一个任务获取信号；互斥量必须在同一个任务中获取信号，同一个任务给出信号。互斥量不能用在中断服务程序中，信号量可以。
   - 互斥量具有优先级继承，信号量没有。
-
 
 ## 二进制信号量
 
@@ -257,7 +255,7 @@ void TestTask(void const * argument)
     if (xSemaphore == NULL) {
         Error_Handler();
     }
-    
+
     while(1)
 	{
         // 等待信号量 阻塞时间设置为最多为10ms
@@ -265,7 +263,7 @@ void TestTask(void const * argument)
         if (xSemaphoreTake(xSemaphore, (TickType_t)(10 / portTICK_RATE_MS)) == pdTRUE) {
              // 任务内容...
         } else {
-            
+
         }
         // 也可以换成用whlie的死循环写法
         while (xSemaphoreTake(xSemaphore, (TickType_t)(10 / portTICK_RATE_MS)) != pdPASS)
@@ -275,9 +273,9 @@ void TestTask(void const * argument)
 }
 
 // 任务中发送信号量
-osSemaphoreRelease(xSemaphore);	
+osSemaphoreRelease(xSemaphore);
 // 任务中释放信号量
-xSemaphoreGive(xSemaphore);	
+xSemaphoreGive(xSemaphore);
 // 中断中释放信号量
 static BaseType_t xHigherPriorityTaskWoken = pdFALSE;	// 不请求上下文切换
 xSemaphoreGiveFromISR(xSemaphore, &xHigherPriorityTaskWoken);
@@ -297,14 +295,14 @@ portYIELD_FROM_ISR(xHigherPriorityTaskWoken);			// 判断是否请求上下文�
   这个优先级提升的过程叫做优先级继承。这个机制用于确保高优先级任务进入阻塞状态的时间尽可能短，以及将已经出现的“优先级翻转”影响降低到最小。
 
   不过优先级继承不能解决优先级反转，只能将这种情况的影响降低到最小。硬实时系统在一开始设计时就要避免优先级反转发生。
-  
+
 - 互斥量不可以用在中断服务程序中。因为互斥量具有优先级继承机制，只有在任务中获取或给出互斥才有意义。并且中断不能因为等待互斥量而阻塞。
 
 - 创建互斥量API为`xSemaphoreCreateMutex()`
 
   递归互斥量还没有完全弄明白就先不写了（逃
 
-  更多可以参考FreeRTOS信号量官方API文档  https://www.freertos.org/a00113.html
+  更多可以参考FreeRTOS信号量官方API文档 https://www.freertos.org/a00113.html
 
 # 任务通知
 
@@ -317,7 +315,7 @@ portYIELD_FROM_ISR(xHigherPriorityTaskWoken);			// 判断是否请求上下文�
   发送通知（无通知值）。实际调用函数为`xTaskGenericNotify`。中断保护版本为`vTaskNotifyGiveFromISR `
 
   ```c
-  BaseType_t xTaskGenericNotify( 
+  BaseType_t xTaskGenericNotify(
           TaskHandle_t xTaskToNotify,				// 被通知的任务句柄
           uint32_t ulValue,						// 更新的通知值
           eNotifyAction eAction,					// 枚举类型，指明更新通知值的方法
@@ -348,17 +346,17 @@ portYIELD_FROM_ISR(xHigherPriorityTaskWoken);			// 判断是否请求上下文�
 
   ```c
   TaskHandle_t task_local_handler = NULL;
-  
+
   void Task(void const * argument)
   {
       task_local_handler = xTaskGetHandle(pcTaskGetName(NULL));		// 获取当前任务的任务句柄
-      
+
       while(1)
       {
   		while (ulTaskNotifyTake(pdTRUE, portMAX_DELAY) != pdPASS);	// 等待通知
       }
   }
-  
+
   void xxxISR()
   {
       static BaseType_t xHigherPriorityTaskWoken = pdFALSE;
@@ -366,8 +364,6 @@ portYIELD_FROM_ISR(xHigherPriorityTaskWoken);			// 判断是否请求上下文�
       portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
   }
   ```
-
-  
 
 # 虚拟定时器
 
@@ -390,11 +386,9 @@ void supervise(void const * argument)
 }
 ```
 
-
-
 这篇记录一下刚接触FreeRTOS的一点学习笔记。实际开发工程中也没全部用上这些API，完整的工程可以看下刚开源的飞机云台程序。有问题的话也请帮忙指出！
 
-------
+---
 
 **参考资料**
 

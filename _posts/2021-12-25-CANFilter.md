@@ -3,7 +3,7 @@ layout: article
 title: CAN通信配置过滤器和使用三个邮箱发送
 date: 2021-12-25
 key: P2021-12-25-1
-tags: ["STM32","RoboMaster"]
+tags: ["STM32", "RoboMaster"]
 show_author_profile: true
 comment: true
 sharing: true
@@ -32,7 +32,7 @@ void Can_Filter_Init(void)
 	sFilterConfig.FilterMaskIdHigh = 0x0000;			// CAN_FxR2寄存器
 	sFilterConfig.FilterMaskIdLow = 0x0000;
 	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;	// 筛选器接筛选报文关联到FIFO0
-	
+
 	if (HAL_CAN_ConfigFilter(&hcan1, &sFilterConfig) != HAL_OK) {						// 配置CAN1接收筛选过滤器
 		Error_Handler();
 	}
@@ -132,7 +132,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	uint8_t rx_data[8] = {0};								// 暂存CAN接收数据
 	motor_measure_t motorDataTmp;							// 电机数据
 	uint8_t i = 0;
-	
+
 	if (hcan == &hcan1)
 	{
 		if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, rx_data) == HAL_OK)	// 接收CAN总线上发送来的数据

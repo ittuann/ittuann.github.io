@@ -62,8 +62,8 @@ angleErr = midline_fff * 0.50f + midline_ff * 0.30f + midline_f * 0.20f;
 
 在这些的基础上增加了最小二乘法对摄像头中线的再拟合，作用也是为了更为了使循迹平滑。
 
-```   c
-slope = RegressionCal(validRow + 3, startRow); 
+```c
+slope = RegressionCal(validRow + 3, startRow);
 angleErr = angleErr * 0.80f + slope * 0.20f;
 ```
 
@@ -112,4 +112,3 @@ angleErr_ff = angleErr_f;
 angleErr_f = angleErr;
 angleErr = angleErr0 * 0.70f + angleErr1 * 0.20f + angleErr2 * 0.10f;
 ```
-

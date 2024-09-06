@@ -3,7 +3,7 @@ layout: article
 title: 能量机关其他部分的配置
 date: 2022-05-14
 key: P2022-05-14
-tags: ["STM32","RoboMaster"]
+tags: ["STM32", "RoboMaster"]
 show_author_profile: true
 comment: true
 sharing: true
@@ -23,19 +23,20 @@ ADC的工作流程为采样 - 比较 - 转换。采样是指对某一时刻的�
 
 - ADC时钟
 
-​	ADC输入时钟ADC_CLK，由PCLK2经过分频产生，最大值是36MHz。
+​ ADC输入时钟ADC_CLK，由PCLK2经过分频产生，最大值是36MHz。
 
 - 采样周期
 
-​	ADC需要若干个ADC_CLK周期完成对输入的电压进行采样。周期就是1/ADC_CLK。ADC最小需要3个周期，因为大幅击打不会有很高的频率，所以设置为480 Cycles也可以。
+​ ADC需要若干个ADC_CLK周期完成对输入的电压进行采样。周期就是1/ADC_CLK。ADC最小需要3个周期，因为大幅击打不会有很高的频率，所以设置为480 Cycles也可以。
 
 - 总转换时间
 
-​	ADC的总转换时间 = （设置的采样周期数 + 12个周期）x ADC_CLK。加12个周期是因为转换精度设置为12Bits
+​ ADC的总转换时间 = （设置的采样周期数 + 12个周期）x ADC_CLK。加12个周期是因为转换精度设置为12Bits
 
 ## ADC Parameter Settings
 
 - DMA Settings开启ADC。
+
   - 配置下DMA模式为`Circular`，既循环更新数据。默认的Normal模式触发后只执行 一次。
   - 设置方向Direction为从外设到内存。
   - 配置自增地址为Memory方式，因为我程序里定义uint16_t 的数组来存储多路ADC数据，占两个字节所以选择`half word`
@@ -83,7 +84,7 @@ uint16_t ADC_ConvertedValue[6] = {0};
 HAL_ADC_Start_DMA(&hadc1, (uint32_t *)&ADC_ConvertedValue, 6);
 ```
 
- 即可开启DMA传输。
+即可开启DMA传输。
 
 ADC的DMA中断函数为`DMA2_Stream0_IRQHandler`。可以直接在DMA中断函数内加入判断是否大幅被击打的程序部分。
 
@@ -108,7 +109,7 @@ uint16_t adcx_get_chx_value(ADC_HandleTypeDef *ADCx, uint32_t ch)
 //	if (HAL_ADC_ConfigChannel(ADCx, &sConfig) != HAL_OK) {
 //		Error_Handler();							// Debug时使用
 //	}
-    
+
 	HAL_ADC_Start(ADCx);							// 开启ADC采样
 
 	HAL_ADC_PollForConversion(ADCx, 1);				// 等待ADC转换结束
@@ -121,8 +122,6 @@ uint16_t adcx_get_chx_value(ADC_HandleTypeDef *ADCx, uint32_t ch)
 }
 ```
 
-
-
 # RNG硬件随机数发生器
 
 STM32F4自带了RBG硬件随机数发生器，RNG处理器是一个以连续模拟噪声为基础的随机数发生器，在主机读数时提供一个 32 位的随机数。
@@ -132,14 +131,12 @@ STM32F4自带了RBG硬件随机数发生器，RNG处理器是一个以连续模�
 生成的 `MX_RNG_Init();` 已经完成了所需的初始化。初始化的过程很简单，首先使能挂载到AHB2总线的随机数发生器时钟，然后使能随机数发生器即可完成初始化。
 
 ```c
-uint32_t HAL_RNG_GetRandomNumber(RNG_HandleTypeDef *hrng);  
+uint32_t HAL_RNG_GetRandomNumber(RNG_HandleTypeDef *hrng);
 ```
 
 该函数用于读取随机数值。
 
 每次读取之前，须先判断RNG_SR这个RNG 状态寄存器的DRDY最低位，如果该位为1则则说明RNG_DR这个数据寄存器的数据是有效的，可以读取得到随机数值，读取后该位自动清零；如果不为 1则需要等待。该函数已包含判断DRDY位并返回读取到的随机数值。
-
-
 
 ```c
 #include "stm32f4xx_hal_rng.h"
@@ -172,8 +169,6 @@ srand((unsigned int)HAL_GetTick());
 tmp = rand() % 5;
 HAL_Delay(1);
 ```
-
-
 
 # Delay_us
 
@@ -240,4 +235,3 @@ void Delay_us(uint16_t us)
 //	while (delay --);
 }
 ```
-
