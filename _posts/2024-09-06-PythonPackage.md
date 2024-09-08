@@ -203,7 +203,7 @@ $ python my_package/a.py
 I'm a
 ['/home/ittuann/test_path/my_package', ...]
 Traceback (most recent call last):
-  File "C:\Downloads\tests\my_package\a.py", line 5, in <module>
+  File "/home/ittuann/test_path/my_package/a.py", line 5, in <module>
     from my_package import b
 ModuleNotFoundError: No module named 'my_package'
 ```
@@ -215,7 +215,7 @@ $ python my_package/a.py
 I'm a
 ['/home/ittuann/test_path/my_package', ...]
 Traceback (most recent call last):
-  File "C:\Downloads\tests\my_package\a.py", line 5, in <module>
+  File "/home/ittuann/test_path/my_package/a.py", line 5, in <module>
     from . import b
 ImportError: attempted relative import with no known parent package
 ```
