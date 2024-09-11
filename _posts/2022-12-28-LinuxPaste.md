@@ -11,7 +11,9 @@ aside:
   toc: true
 ---
 
-Linux的各种复制粘贴。VIM、tmux、和终端之间的复制粘贴
+Linux的各种复制粘贴。VIM、tmux、nvim、和终端之间的复制粘贴。
+
+更新：已经换为在tumx中用Neovim了。
 
 <!--more-->
 
@@ -85,11 +87,28 @@ vnoremap Y "+y
 
 说实话被vim剪贴板的事弄得一直不太满意。有点不想折腾了，直接装 Neovim 吧
 
+添加 PPA(Personal Package Archive) 存储库并安装：
+
 ```bash
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt update
+
 sudo apt install neovim
 ```
 
-然后还需要额外把 `sudoedit` 默认的编辑器从vim换到neovim
+PPA是软件包来自于个人或团队提供的存储库。测试安装：`nvim --version`
+
+从 Neovim 0.10.0 ([#25872](https://github.com/neovim/neovim/pull/25872)) 开始，Neovim 已经内置了原生的 [ANSI OSC52](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h3-Operating-System-Commands) 支持，能将文本复制到系统剪贴板。
+
+完成安装后执行`nvim`进入Neovim，再输入：
+
+```
+:checkhealth
+```
+
+根据提示信息，检查是否有内容需要修改，也要检查`Clipboard (optional)`部分。
+
+最后，还需要额外把 `sudoedit` 默认的编辑器从vim换到neovim
 
 ```bash
 sudo update-alternatives --config editor
@@ -97,9 +116,13 @@ sudo update-alternatives --config editor
 
 该命令会列出系统中可用的编辑器选项，并要求选择一个作为默认的编辑器。
 
-更新：已经在用Neovim了
-
 # tmux
+
+在 .tmux.conf 中添加配置：
+
+```
+set -s set-clipboard on
+```
 
 tmux内部复制/粘贴文本的通用方式：
 
@@ -121,17 +144,17 @@ Linux终端下的复制方式：
 
 (a)左键长按选中要复制的内容
 
-​ 然后按ctrl+Ins复制 shift+Ins粘贴
+ 然后按ctrl+Ins复制 shift+Ins粘贴
 
 (b)shift+鼠标左键长按选中
 
-​ 然后按ctrl+Ins复制shift+Ins粘贴
+ 然后按ctrl+Ins复制shift+Ins粘贴
 
 (c)鼠标左键选中开头的若干字符
 
-​ 按住Shift，同时鼠标左击要复制内容的末尾，此时会选中从开头到左键点击末尾位置的所有内容
+ 按住Shift，同时鼠标左击要复制内容的末尾，此时会选中从开头到左键点击末尾位置的所有内容
 
-​ 然后按ctrl+Ins复制shift+Ins粘贴
+ 然后按ctrl+Ins复制shift+Ins粘贴
 
 参考链接:
 
