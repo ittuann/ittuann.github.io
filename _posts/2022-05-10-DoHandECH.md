@@ -69,6 +69,7 @@ netsh dns add encryption server=223.5.5.5 dohtemplate=https://dns.alidns.com/dns
 netsh dns add encryption server=2400:3200::1 dohtemplate=https://dns.alidns.com/dns-query autoupgrade=yes udpfallback=no
 # Tencent
 netsh dns add encryption server=119.29.29.29 dohtemplate=https://doh.pub/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=2402:4e00:: dohtemplate=https://doh.pub/dns-query autoupgrade=yes udpfallback=no
 # Quad101
 netsh dns add encryption server=101.101.101.101 dohtemplate=https://dns.twnic.tw/dns-query autoupgrade=yes udpfallback=no
 netsh dns add encryption server=2001:de4::101 dohtemplate=https://dns.twnic.tw/dns-query autoupgrade=yes udpfallback=no
