@@ -187,22 +187,22 @@ permalink   : date
 
 exclude:
   - /_posts/_img
-  - /docs
-  - /test
   - /docker
-  - /screenshots
   - CHANGELOG.md
   - HOW_TO_RELEASE.md
-  - README-*.md
-  - README.md
-  - LICENSE
   - Gemfile
   - Gemfile.lock
+  - LICENSE
+  - README-*.md
+  - README.md
   - gulpfile.js
   - jekyll-text-theme.gemspec
   - package-lock.json
   - package.json
+  - /docs
   - /node_modules
+  - /screenshots
+  - /test
   - /vendor
 
 defaults:

@@ -119,7 +119,7 @@ AdGuard Home 的过滤规则兼容 Adblock 语法、Hosts 语法及 Domain-only 
 
 EDNS（扩展域名系统，Extension Mechanisms for DNS）本身并不设计用于增强隐私，它主要是在标准的DNS查询中添加一些额外的数据。
 
-特别是在使用EDNS Client Subnet（ECS）功能时。ECS会在DNS查询中附加用户的IP地址片段，向上游的DNS服务器暴露用户的大致地理位置。虽然这有助于返回离用户最近的数据中心的响应，提升速度，但它会在查询过程中暴露用户部分IP地址的前缀。部分DNS解析服务商考虑隐私直接选择不支持ECS。
+特别是在使用 EDNS 客户端子网（EDNS Client Subnet，ECS）功能时。ECS会在DNS查询中附加用户的IP地址片段，向上游的DNS服务器暴露用户的大致地理位置。虽然这有助于返回离用户最近的数据中心的响应，提升速度，但它会在查询过程中暴露用户部分IP地址的前缀。部分DNS解析服务商考虑隐私直接选择不支持ECS。
 
 ## 启用 DNSSEC
 
