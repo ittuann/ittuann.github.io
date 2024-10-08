@@ -13,7 +13,7 @@ default:
   chart: false
   toc:
     selectors: 'h1,h2,h3'
-  sources: bootcdn
+  sources: jsdelivr
 
   page:
     mode: normal
@@ -40,7 +40,7 @@ default:
     search: default
 
 sources:
-  bootcdn:
+  jsdelivr:
     font_awesome: 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.css'
     jquery: 'https://cdn.jsdelivr.net/npm/jquery@3.1.1/dist/jquery.min.js'
     leancloud_js_sdk: 'https://cdn.jsdelivr.net/npm/leancloud-storage@3.13.2/dist/av-min.js'

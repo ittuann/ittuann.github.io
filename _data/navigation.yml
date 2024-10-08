@@ -1,36 +1,36 @@
 header:
   - titles :
-      en      : &EN       Home🏡
-      zh      : &zh       首页🏡
+      en      : &EN       Home
+      zh      : &zh       首页
     url       : /index.html
 
   - titles:
       # @start locale config
-      en      : &EN       Article List🗃️
+      en      : &EN       Article List
       en-GB   : *EN
       en-US   : *EN
       en-CA   : *EN
       en-AU   : *EN
-      zh-Hans : &ZH_HANS  文章列表🗃️
+      zh-Hans : &ZH_HANS  文章列表
       zh      : *ZH_HANS
       zh-CN   : *ZH_HANS
       zh-SG   : *ZH_HANS
-      zh-Hant : &ZH_HANT  文章列表🗃️
+      zh-Hant : &ZH_HANT  文章列表
       zh-TW   : *ZH_HANT
       zh-HK   : *ZH_HANT
-      ko      : &KO       기사 목록🗃️
+      ko      : &KO       기사 목록
       ko-KR   : *KO
-      fr      : &FR       Liste d'articles🗃️
+      fr      : &FR       Liste d'articles
       fr-BE   : *FR
       fr-CA   : *FR
       fr-CH   : *FR
       fr-FR   : *FR
       fr-LU   : *FR
-      tr      : &TR       Makale Listesi🗃️
+      tr      : &TR       Makale Listesi
       # @end locale config
     url: /archive.html
 
-  - title:      GitHub💻
+  - title:      GitHub
     url:        https://github.com/ittuann
 
   - titles:
