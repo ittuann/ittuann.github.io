@@ -15,7 +15,16 @@ aside:
 
 <!--more-->
 
-国内的DNS服务商中，目前只有阿里支持ipv4和ipv6的DoH。可以分别通过`dig AAAA dns.alidns.com`和`dig A dns.alidns.com`测试。
+国内的DNS服务商中，目前只有阿里和腾讯支持ipv4和ipv6的DoH。
+
+测试DNS是否支持DoH:
+
+```
+curl -H 'accept: application/dns-json' 'https://doh.pub/dns-query?name=baidu.com&type=A'
+curl -H 'accept: application/dns-json' 'https://doh.pub/dns-query?name=baidu.com&type=AAAA'
+```
+
+或者也可以通过`dig AAAA dns.alidns.com`和`dig A dns.alidns.com`测试。
 
 # Windows11
 
@@ -77,7 +86,7 @@ netsh dns add encryption server=2001:de4::101 dohtemplate=https://dns.twnic.tw/d
 
 # Android
 
-一加的Oxygen OS 11
+Android目前仅支持配置DoT，不支持配置DoH。系统是一加的Oxygen OS 11 (Android 11)
 
 WLAN和互联网 - 私人DNS - 私人DNS提供商主机名称
 
@@ -125,9 +134,17 @@ Firefox: 设置 - 常规 - 网络设置 - 设置 - 启用基于 HTTPS 的 DNS
 
 <https://crypto.cloudflare.com/cdn-cgi/trace/>
 
+# Cloudflare Workers 自部署反代 1.1.1.1 的 DoH
+
+为了避免国内的主动扫描探测，最好要配置成：`DoH + 非标路径 + 客户端白名单(可选)`的形式。也就是说要用`/<random_str>/<secret>`，不要直接用默认的`/dns-query`。
+
+国内目前53(UDP)和 853(DoT)都是重点关注对象，用国外服务器搭建也会被抢答或者阻断，所以目前只推荐使用 443(DoH 或 DoQ) 的方式连接。
+
+https://github.com/tina-hello/doh-cf-workers
+
 # ECH
 
-ECH 全称是 Encrypted Client Hello ，主要用于增强互联网连接的隐私保护。ECH 的核心是确保主机名不被暴露给互联网服务提供商、网络提供商和其它有能力监听网络流量的实体。
+ECH 全称是 Encrypted Client Hello ，即安全 SNI。主要用于增强互联网连接的隐私保护。ECH 的核心是确保主机名不被暴露给互联网服务提供商、网络提供商，以及其它有能力监听网络流量的实体。
 
 ## Chrome
 
