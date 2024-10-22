@@ -1,11 +1,15 @@
-# http://editorconfig.org
 root = true
 
 [*]
-charset = utf-8
-end_of_line = lf
-indent_size = 2
 indent_style = space
-insert_final_newline = true
-max_line_length = 80
+indent_size = 4
+end_of_line = crlf
+charset = utf-8
 trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{json,json5,yml,yaml}]
+indent_size = 2
+
+[*.{js,mjs,cjs,jsx,ts,tsx,css,scss,sass,html,htm}]
+indent_size = 2
