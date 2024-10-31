@@ -84,6 +84,7 @@ java -Xmx2G -Xms512M -jar fabric-server-mc.1.21.1-loader.0.16.7-launcher.1.0.1.j
 online-mode=false # 关闭正版验证
 pvp=true   # PVP
 difficulty=easy  # 游戏难度。默认为easy，可选peaceful/easy/normal/hard
+motd=\u00a7oittuann\u00a7r \u00a72Minecraft\u00a7r Server\u2764	# 服务器描述
 ```
 
 - 控制台命令：
@@ -126,6 +127,7 @@ Mob:
 - LuckPerms <https://modrinth.com/mod/luckperms> 权限管理
 - Chunky <https://modrinth.com/plugin/chunky> 预生成区块
 - Simple Voice Chat <https://modrinth.com/plugin/simple-voice-chat> 游戏内语音(同时需要客户端mod)
+- Fast Backups https://modrinth.com/mod/fastback 世界备份
 - FallingTree <https://modrinth.com/mod/fallingtree> 砍树
 - Carry On <https://modrinth.com/mod/carry-on> 搬运箱子
 
@@ -148,9 +150,9 @@ Mob:
 [JEI物品管理器] Just Enough Items
     选中物品后按R键即可显示该物品配方
 [JER] Just Enough Resources  # 为JEI添加生物掉落等信息
+[JEI拼音搜索] Just Enough Characters
 [玉] Jade 🔍
 [合成辅助] Crafting Tweaks
-[配置界面] configured
 [一键背包整理] Inventory Profiles Next
     https://www.mcmod.cn/post/2650.html
 [苹果皮] appleskin
@@ -162,6 +164,7 @@ Mob:
 - 社交类:
 
 ```
+[禁用聊天举报] No Chat Reports
 [更多聊天记录] More Chat History
 [聊天头像] chat-heads
 ```
@@ -170,13 +173,23 @@ Mob:
 
 ```
 [落叶粒子效果] Falling Leaves
+[光影] Iris Shaders
 [动态光源] LambDynamicLights
+[光线追踪] Photonics: A raytracing engine
+```
+
+- 建筑
+
+```
+[投影] Litematica
 ```
 
 - 其他
 
 ```
-[禁用聊天举报] No Chat Reports
+[搬运] Carry On
+[地毯] Carpet
+	仙人掌扳手
 ReplayMod
 Freecam (Modrinth Edition)
 ```
@@ -195,6 +208,7 @@ Iris Shaders <https://modrinth.com/mod/iris> （替代OptiFine）
 ## 可选材质包
 
 - 红石辅助RedstoneAuxiliary <https://modrinth.com/resourcepack/redstoneauxiliary>
+- Roundista https://modrinth.com/resourcepack/roundista
 
 # 参考链接
 

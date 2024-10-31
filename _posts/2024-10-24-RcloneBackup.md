@@ -36,7 +36,7 @@ rclone config
 
 然后根据提示，完成配置remote的webdav设置。
 
-测试配置：
+列出远程存储中的文件，测试是否配置和连接正常：
 
 ```bash
 rclone ls <remote_name>:</path/to/remote/>
@@ -94,7 +94,7 @@ rclone sync "${BACKUP_ZIP_DIR}" "${REMOTE_NAME}":"${REMOTE_DIR}" --verbose --pro
 find "${BACKUP_ZIP_DIR}" -name "*.zip" -type f -mtime +7 -exec rm {} \; || { echo "Clean failed"; exit 1; }
 ```
 
-如果只想要上传，而不想删除远程的历史备份版本，就用`rclone copy`命令。
+如果只想要上传，而不希望删除远程的任何现有文件，就使用`rclone copy`命令。
 
 使用 `chmod +x backup_script.sh` 来赋予脚本执行权限。
 
@@ -112,6 +112,18 @@ crontab -e
 0 4 * * * /path/to/your/script.sh
 ```
 
+## 其他
+
+- `--dry-run`测试传输
+
+使用 `--dry-run` 选项进行测试，这样会显示 `rclone` 将会做什么，但实际上不会执行传输操作。`rclone copy --dry-run  `和`rclone sync --dry-run  `都支持传输测试。
+
+- `rclone check`
+
+测试两个目录（本地或远程）之间的同步是否正确。它会比较源目录和目标目录中文件的哈希值或文件大小，确保两者一致。`rclone check local-dir remote:remote-dir`
+
+
+
 # Restic 
 
 使用 Restic 进行备份。TODO待补充
@@ -122,4 +134,4 @@ crontab -e
 
 - Duplicati
 
-开源项目，是Web页面对操作更友好。但CLI命令行的支持在官方文档中就写了一页，感觉软件会更侧重于GUI而不是用于服务器的CLI。有Docker镜像可以直接拉。
+开源项目，是Web页面对操作更友好。但CLI命令行的支持在官方文档中就写了一页，感觉软件会更侧重于GUI而不是用于服务器的CLI。项目有Docker镜像可以直接拉。
