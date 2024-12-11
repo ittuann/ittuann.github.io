@@ -42,7 +42,7 @@ NVM安装的每个 Node.js 版本都有其独立的全局 npm 包，这样可以
 
 # npm
 
-NPM (Node Package Manager) 是 Node.js 的默认包管理器，用于安装、管理和发布 JavaScript 库。但是对某些项目，安装速度可能较慢。
+NPM (Node Package Manager) 是 Node.js 的默认包管理器，用于安装、管理和发布 JavaScript 库。
 
 # npx
 
@@ -54,7 +54,7 @@ NPX主要是为了解决某些特定的使用场景，不是一个完整的包�
 
 # yarn
 
-yarn 是一个 JavaScript 包管理器，由 Facebook 推出，作为 npm 的替代方案。由于 Node.js 是 JavaScript 运行时环境，所以我们也会说它是 Node.js 的包管理器。
+yarn 是一个 JavaScript 包管理器，由 Facebook 推出，作为 npm 的替代方案。
 
 `yarn.lock` 文件确保了安装的依赖版本的一致性。
 
@@ -65,4 +65,6 @@ PNPM 是另一个 JavaScript 包管理器，其目标是更高效地存储项目
 - 使用硬链接和符号链接存储 `node_modules`，从而节省空间。
 - 严格的 `node_modules` 结构，确保所有项目共享相同的依赖版本。
 
-但是，相对于 npm 和 yarn，PNPM 社区规模较小。同时一些工具或库可能不完全支持 PNPM 的 `node_modules` 结构。
+# 最终选择
+
+以pnpm为主。如果跑很老项目有依赖问题运行不起来就换yarn。最后要是还有问题就只能回去用npm了。
