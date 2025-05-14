@@ -147,6 +147,7 @@ Mob:
 
 ```
 [模组菜单] Mod Menu
+[锂] Lithium
 [JEI物品管理器] Just Enough Items
     选中物品后按R键即可显示该物品配方
 [JER] Just Enough Resources  # 为JEI添加生物掉落等信息
@@ -173,6 +174,7 @@ Mob:
 
 ```
 [落叶粒子效果] Falling Leaves
+[实体模型特性] Entity Model Features(EMF)
 [光影] Iris Shaders
 [动态光源] LambDynamicLights
 [光线追踪] Photonics: A raytracing engine
@@ -207,7 +209,13 @@ Iris Shaders <https://modrinth.com/mod/iris> （替代OptiFine）
 
 ## 可选材质包
 
+- Better Leaves https://modrinth.com/resourcepack/better-leaves
+- Dramatic Skys https://modrinth.com/resourcepack/dramatic-skys
+- Fresh Animations https://modrinth.com/resourcepack/fresh-animations
 - 红石辅助RedstoneAuxiliary <https://modrinth.com/resourcepack/redstoneauxiliary>
+
+其他有趣的材质包：
+
 - Roundista https://modrinth.com/resourcepack/roundista
 
 # 参考链接
