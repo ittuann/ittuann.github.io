@@ -11,9 +11,15 @@ aside:
   toc: true
 ---
 
-做个备忘录，记录下主力设备 Win11、安卓、IOS、路由器、浏览器 配置 DoH(DNS-over HTTPS) 的过程。以及浏览器开启 Encrypted Client Hello (Secure SNI) 。
+在 Windows11、安卓、IOS、路由器、浏览器 配置 DoH(DNS-over HTTPS) 的方法，以及浏览器开启 ECH(Encrypted Client Hello)。
 
 <!--more-->
+
+DoH 全称是 DNS-over-HTTPS，即使用 HTTPS 协议通过 443 端口进行 DNS 解析。主要用于防止 DNS 被监听和污染，从而增强互联网连接的隐私保护和安全性。
+
+ECH 全称是 Encrypted Client Hello ，即 Secure SNI 安全加密扩展。主要用于防止 SNI (Server Name Indication) 被监听和篡改，从而增强网络流量的保护和安全性。
+
+## 配置 DoH 和 ECH
 
 国内的DNS服务商中，目前只有阿里和腾讯支持ipv4和ipv6的DoH。
 
@@ -26,7 +32,7 @@ curl -H 'accept: application/dns-json' 'https://doh.pub/dns-query?name=baidu.com
 
 或者也可以通过`dig AAAA dns.alidns.com`和`dig A dns.alidns.com`测试。
 
-# Windows11
+### Windows11
 
 设置 - 网络和Internet - WLAN - 硬件属性 \- DNS服务器分配
 
@@ -84,7 +90,29 @@ netsh dns add encryption server=101.101.101.101 dohtemplate=https://dns.twnic.tw
 netsh dns add encryption server=2001:de4::101 dohtemplate=https://dns.twnic.tw/dns-query autoupgrade=yes udpfallback=no
 ```
 
-# Android
+### 浏览器
+
+- Chrome
+
+设置 - 隐私设置和安全性 - 安全 - 使用安全DNS
+
+开启ECH: `chrome://flags/#encrypted-client-hello` 将 Encrypted ClientHello 设置为`Enabled`
+
+`Ctrl + R` 正常重加载
+
+`Ctrl + Shift + R` 硬性重加载
+
+按下`F12`进入调试后，右键地址栏左侧的刷新按钮，会出现 清空缓存并硬性重加载 。
+
+- Firefox
+
+设置 - 常规 - 网络设置 - 设置 - 启用基于 HTTPS 的 DNS
+
+开启ECH: 在 `about:config` 搜索条目 `network.dns.echconfig.enabled` 和 `network.dns.use_https_rr_as_altsvc`，将它们的设定改为 `true` 即可。
+
+在 `about:config` 中将 `network.trr.mode`设置为 `2`（默认是0），即优先使用用 TRR（也就是我们的 DNS over HTTPS），在解析失败时使用常规方式。也可以设置成`3`，强制 Firefox 使用 DoH。参见 https://wiki.mozilla.org/Trusted_Recursive_Resolver
+
+### Android
 
 Android目前仅支持配置DoT，不支持配置DoH。系统是一加的Oxygen OS 11 (Android 11)
 
@@ -92,7 +120,7 @@ WLAN和互联网 - 私人DNS - 私人DNS提供商主机名称
 
 使用alidns的话填 `dns.alidns.com`
 
-# IOS
+### IOS
 
 通过添加配置描述文件的方式启用。
 
@@ -106,7 +134,7 @@ WLAN和互联网 - 私人DNS - 私人DNS提供商主机名称
 
 IOS15 在 `设置 - 通用 - 设备管理 - DNS` 启用
 
-# 路由器
+### 路由器
 
 梅林: WAN - DNS Privacy Protocol
 
@@ -114,19 +142,7 @@ IOS15 在 `设置 - 通用 - 设备管理 - DNS` 启用
 
 另外 SmartDNS 直接添加即可
 
-# 浏览器
-
-Chrome: 设置 - 隐私设置和安全性 - 安全 - 使用安全DNS
-
-Firefox: 设置 - 常规 - 网络设置 - 设置 - 启用基于 HTTPS 的 DNS
-
-`Ctrl + R` 正常重加载
-
-`Ctrl + Shift + R` 硬性重加载
-
-按下`F12`进入调试后，右键地址栏左侧的刷新按钮，会出现 清空缓存并硬性重加载 。
-
-# 检测是否正在使用DOH
+## 检测是否正在使用 DoH 和 ECH
 
 <https://www.cloudflare.com/zh-cn/ssl/encrypted-sni/>
 
@@ -134,24 +150,14 @@ Firefox: 设置 - 常规 - 网络设置 - 设置 - 启用基于 HTTPS 的 DNS
 
 <https://crypto.cloudflare.com/cdn-cgi/trace/>
 
-# Cloudflare Workers 自部署反代 1.1.1.1 的 DoH
+<https://tls-ech.dev/>
+
+也可以使用 Wireshark 抓包查看。
+
+## Cloudflare Workers 自部署反代 1.1.1.1 的 DoH
 
 为了避免国内的主动扫描探测，最好要配置成：`DoH + 非标路径 + 客户端白名单(可选)`的形式。也就是说要用`/<random_str>/<secret>`，不要直接用默认的`/dns-query`。
 
-国内目前53(UDP)和 853(DoT)都是重点关注对象，用国外服务器搭建也会被抢答或者阻断，所以目前只推荐使用 443(DoH 或 DoQ) 的方式连接。
+国内目前 53(UDP) 和 853(DoT) 端口都是重点关注对象，用国外服务器搭建也会被抢答或者阻断，所以目前只推荐使用 443(DoH 或 DoQ) 的方式连接。
 
 https://github.com/tina-hello/doh-cf-workers
-
-# ECH
-
-ECH 全称是 Encrypted Client Hello ，即安全 SNI。主要用于增强互联网连接的隐私保护。ECH 的核心是确保主机名不被暴露给互联网服务提供商、网络提供商，以及其它有能力监听网络流量的实体。
-
-## Chrome
-
-开启ECH: `chrome://flags/#encrypted-client-hello` 将 Encrypted ClientHello 设置为`Enabled`
-
-## Firefox
-
-开启ECH: 在 `about:config` 搜索条目 `network.dns.echconfig.enabled` 和 `network.dns.use_https_rr_as_altsvc`，将它们的设定改为 `true` 即可。
-
-在 `about:config` 中将 `network.trr.mode`设置为 `2`（默认是0），即优先使用用 TRR（也就是我们的 DNS over HTTPS），在解析失败时使用常规方式。也可以设置成`3`，强制 Firefox 使用 DoH。参见 https://wiki.mozilla.org/Trusted_Recursive_Resolver
