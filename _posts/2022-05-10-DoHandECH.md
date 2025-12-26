@@ -136,23 +136,37 @@ IOS15 在 `设置 - 通用 - 设备管理 - DNS` 启用
 
 ### 路由器
 
+OpenWrt: https://openwrt.org/docs/guide-user/services/dns/doh_dnsmasq_https-dns-proxy
+
 梅林: WAN - DNS Privacy Protocol
 
 老毛子(Padavan)身边暂时没有
 
-另外 SmartDNS 直接添加即可
+AdGuardHome / NextDNS 可以配置 DoH
 
 ## 检测是否正在使用 DoH 和 ECH
 
 <https://www.cloudflare.com/zh-cn/ssl/encrypted-sni/>
 
-<https://1.1.1.1/help/>
+<https://one.one.one.one/help/>
 
 <https://crypto.cloudflare.com/cdn-cgi/trace/>
 
 <https://tls-ech.dev/>
 
 也可以使用 Wireshark 抓包查看。
+
+- DNSSEC 测试
+
+<https://dnscheck.tools/>
+<https://wander.science/projects/dns/dnssec-resolver-test/>
+
+- DNS Leak 测试
+
+<https://dnsleaktest.com/>
+<https://www.browserscan.net/>
+
+WebRTC Leak Test: <https://browserleaks.com/webrtc>
 
 ## Cloudflare Workers 自部署反代 1.1.1.1 的 DoH
 

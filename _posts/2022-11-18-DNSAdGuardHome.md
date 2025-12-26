@@ -11,125 +11,112 @@ aside:
   toc: true
 ---
 
-记录下OpenWrt软路由上的AdGuard Home内DNS配置。
+OpenWrt 软路由中 AdGuard Home 的 DNS 配置。
 
 <!--more-->
 
-环境为 OpenWrt 内核5.4.190 AdGuard Home v0.107.18
+环境为 AdGuard Home v0.107.71,  OpenWrt 内核5.4.190
 
-# DNS 设置
+## DNS 设置
 
 **已知 DNS 提供商列表 <https://kb.adguard.com/general/dns-providers> **
 
 - 上游DNS服务器
 
-  ```
-  https://dns.alidns.com/dns-query
-  https://doh.pub/dns-query
-  # tcp://114.114.114.114
-  # 223.5.5.5
-  # 119.29.29.29
-  2400:3200::1
-  2402:4e00::
-  # OpenClash
-  # 127.0.0.1:7874
-  ```
+```
+https://dns.alidns.com/dns-query
+https://doh.pub/dns-query
+https://doh.360.cn
+https://dns.ipv6dns.com/dns-query
+# OpenClash
+# 127.0.0.1:7874
+```
 
-  使用了`并行请求`
+全部使用 DoH（DNS over HTTPS）协议，提高隐私性及安全性。
 
 - Bootstrap DNS 服务器
+用于解析指定为上游的 DoH/DoT 解析器的 IP 地址。
 
-  ```
-  223.5.5.5
-  119.29.29.29
-  2400:3200::1
-  2402:4e00::
-  ```
+```
+223.5.5.5
+119.29.29.29
+2400:3200::1
+2402:4e00::
+```
 
-# 过滤器 - DNS拦截列表
+- 使用`最快的 IP 地址`
 
-- anti-AD
+## 过滤器 - DNS拦截列表
 
-  https://anti-ad.net/easylist.txt
+- [anti-AD](https://github.com/privacy-protection-tools/anti-AD)
 
-  命中率高、兼容性强。**注意该规则的作者曾存在向规则内夹带私货的行为。**
+https://anti-ad.net/easylist.txt
 
-- halflife
+命中率高、兼容性强。
 
-  https://cdn.jsdelivr.net/gh/o0HalfLife0o/list@master/ad.txt
+**注意该规则的作者曾存在向规则内夹带私货的行为** https://github.com/Mosney/anti-anti-AD
 
-  涵盖了 EasyList China、EasyList Lite、CJX ’s Annoyance List[cjx82630]、Xinggsf 乘风视频过滤规则，以及补充的其它规则
+- [AdRules](https://github.com/Cats-Team/AdRules)
 
-- Adblock Warning Removal List
+中国地区广告屏蔽列表
 
-  https://easylist-downloads.adblockplus.org/antiadblockfilters.txt
+- [HalfLife](https://github.com/sbwml/halflife-list)
 
-  去除禁止广告拦截提示规则
+https://cdn.jsdelivr.net/gh/o0HalfLife0o/list@master/ad.txt
 
-性能足够的情况可以启用
+ad-pc 涵盖了 EasyList China、EasyList Lite、CJX ’s Annoyance List[cjx82630]、Xinggsf 乘风视频过滤规则，以及补充的其它规则
+ad-edentw 合并自 Adblock Warning Removal List、ABP filters、anti-adblock-killer-filters
 
-- EasyPrivacy
+- [EasyPrivacy](https://easylist.to/)
 
-  https://easylist-downloads.adblockplus.org/easyprivacy.txt
+https://easylist-downloads.adblockplus.org/easyprivacy.txt
 
-  反隐私跟踪、挖矿规则
+EasyList的扩展规则，反隐私跟踪、挖矿规则
 
-- Fanboy’s Annoyances List
+- [HaGeZi's Blocklist](https://github.com/hagezi/dns-blocklists)
 
-  https://easylist-downloads.adblockplus.org/fanboy-annoyance.txt
+推荐用 Pro 版本就可以。另外还有 HaGeZi's Xiaomi Tracker Blocklist
 
-  去除页面弹窗广告规则
-
-其他
+其他:
 
 - AdGuard DNS Filter
 
-  https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_15_DnsFilter/filter.txt
+https://raw.githubusercontent.com/AdguardTeam/FiltersRegistry/master/filters/filter_15_DnsFilter/filter.txt
 
-  AdGuard 官方维护的广告规则，涵盖多种过滤规则
+AdGuard 官方维护的广告规则，涵盖多种过滤规则
 
 - EasyList
 
-  https://easylist-downloads.adblockplus.org/easylist.txt
+https://easylist-downloads.adblockplus.org/easylist.txt
 
-  Adblock Plus 官方维护的广告规则
+Adblock Plus 官方维护的广告规则
 
-- EasyList China
+EasyList China 是面向中文用户的 EasyList 扩展规则。EasyList 是主规则。
 
-  https://easylist-downloads.adblockplus.org/easylistchina.txt
+https://easylist-downloads.adblockplus.org/easylistchina.txt
 
-  面向中文用户的 EasyList 去广告规则
-
-# 自定义过滤规则
+- 自定义过滤规则
 
 AdGuard Home 的过滤规则兼容 Adblock 语法、Hosts 语法及 Domain-only 语法。
 
-| **语法**                | **作用**                                  |
-| ----------------------- | ----------------------------------------- |
-| `\|\|example.org^`      | 拦截 example.org 域名及其所有子域名       |
-| `@@\|\|example.org^`    | 放行 example.org 及其所有子域名           |
-| `127.0.0.1 example.org` | 将 example.org 解析到 127.0.0.1           |
-| `/REGEX/`               | 阻止访问与 example_regex_meaning 匹配的域 |
-| `! 这是一行注释`        | 只是一条注释                              |
-| `# 这是一行注释`        | 只是一条注释                              |
+## 其他设置
 
-# 其他设置
+- 启用 DNSSEC
 
-## 不启用 EDNS 客户端子网
+- 不启用 EDNS 客户端子网
 
 EDNS（扩展域名系统，Extension Mechanisms for DNS）本身并不设计用于增强隐私，它主要是在标准的DNS查询中添加一些额外的数据。
 
 特别是在使用 EDNS 客户端子网（EDNS Client Subnet，ECS）功能时。ECS会在DNS查询中附加用户的IP地址片段，向上游的DNS服务器暴露用户的大致地理位置。虽然这有助于返回离用户最近的数据中心的响应，提升速度，但它会在查询过程中暴露用户部分IP地址的前缀。部分DNS解析服务商考虑隐私直接选择不支持ECS。
 
-## 启用 DNSSEC
+重定向 - `作为dnsmasq的上游服务器`
+配置后局域网客户端都显示127.0.0.1是正常的，只影响统计显示，不影响实际解析。
 
-## 其他
+速度限制 - `0`
 
-重定向 - 作为dnsmasq的上游服务器
+在关机时备份工作目录文件 - `filters`、`stats.db`、`sessions.db`、`querylog.json`
 
-在关机时备份工作目录文件 - `filters`、`stats.db`、`sessions.db`
-
-系统升级时保留文件 - `配置文件`、`0sessions.db`、`stats.db`、`filters`
+系统升级时保留文件 - `配置文件`、`sessions.db`、`stats.db`、`filters`
 
 计划任务 - 自动更新ipv6主机并重启adh
 
