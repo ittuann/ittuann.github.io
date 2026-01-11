@@ -150,9 +150,11 @@ AdGuardHome / NextDNS 可以配置 DoH
 
 <https://one.one.one.one/help/>
 
-<https://crypto.cloudflare.com/cdn-cgi/trace/>
+<https://crypto.cloudflare.com/cdn-cgi/trace/> 其中`sni=encrypted`代表启用了ECH
 
 <https://tls-ech.dev/>
+
+<https://browserleaks.com/tls>
 
 也可以使用 Wireshark 抓包查看。
 
@@ -163,8 +165,10 @@ AdGuardHome / NextDNS 可以配置 DoH
 
 - DNS Leak 测试
 
+<https://ipleak.net/>
 <https://dnsleaktest.com/>
 <https://www.browserscan.net/>
+<https://browserleaks.com/ip>
 
 WebRTC Leak Test: <https://browserleaks.com/webrtc>
 
@@ -174,4 +178,4 @@ WebRTC Leak Test: <https://browserleaks.com/webrtc>
 
 国内目前 53(UDP) 和 853(DoT) 端口都是重点关注对象，用国外服务器搭建也会被抢答或者阻断，所以目前只推荐使用 443(DoH 或 DoQ) 的方式连接。
 
-https://github.com/tina-hello/doh-cf-workers
+<https://github.com/tina-hello/doh-cf-workers>

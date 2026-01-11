@@ -71,7 +71,7 @@ ad-edentw 合并自 Adblock Warning Removal List、ABP filters、anti-adblock-ki
 
 https://easylist-downloads.adblockplus.org/easyprivacy.txt
 
-EasyList的扩展规则，反隐私跟踪、挖矿规则
+EasyList 的扩展规则，反隐私跟踪、挖矿规则
 
 - [HaGeZi's Blocklist](https://github.com/hagezi/dns-blocklists)
 
@@ -109,10 +109,12 @@ EDNS（扩展域名系统，Extension Mechanisms for DNS）本身并不设计用
 
 特别是在使用 EDNS 客户端子网（EDNS Client Subnet，ECS）功能时。ECS会在DNS查询中附加用户的IP地址片段，向上游的DNS服务器暴露用户的大致地理位置。虽然这有助于返回离用户最近的数据中心的响应，提升速度，但它会在查询过程中暴露用户部分IP地址的前缀。部分DNS解析服务商考虑隐私直接选择不支持ECS。
 
+速度限制 - `0`
+
+- OpenWrt 面板设置
+
 重定向 - `作为dnsmasq的上游服务器`
 配置后局域网客户端都显示127.0.0.1是正常的，只影响统计显示，不影响实际解析。
-
-速度限制 - `0`
 
 在关机时备份工作目录文件 - `filters`、`stats.db`、`sessions.db`、`querylog.json`
 
