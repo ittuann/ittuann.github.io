@@ -46,11 +46,13 @@ https://dns.ipv6dns.com/dns-query
 
 - 使用`最快的 IP 地址`
 
+根据 AdGuard Home 官方文章推荐开启。当所在国家有阻止IP时，此功能帮用户查找到不仅是最快速，而且有效的地址。
+
+https://adguard.com/zh_cn/blog/in-depth-review-adguard-home.html
+
 ## 过滤器 - DNS拦截列表
 
 - [anti-AD](https://github.com/privacy-protection-tools/anti-AD)
-
-https://anti-ad.net/easylist.txt
 
 命中率高、兼容性强。
 
@@ -58,24 +60,32 @@ https://anti-ad.net/easylist.txt
 
 - [AdRules](https://github.com/Cats-Team/AdRules)
 
-中国地区广告屏蔽列表
+中国地区广告屏蔽列表。用Plus版。
+
+- [AWAvenue](https://github.com/TG-Twilight/AWAvenue-Ads-Rule)
+
+秋风广告规则，中国地区广告屏蔽列表。数量少，针对于摇一摇/微信订阅号等场景。
 
 - [HalfLife](https://github.com/sbwml/halflife-list)
 
 https://cdn.jsdelivr.net/gh/o0HalfLife0o/list@master/ad.txt
 
-ad-pc 涵盖了 EasyList China、EasyList Lite、CJX ’s Annoyance List[cjx82630]、Xinggsf 乘风视频过滤规则，以及补充的其它规则
+ad-pc 合并自 Easylist、EasyList China、EasyPrivacy、CJX ’s Annoyance List [cjx82630]、Xinggsf 乘风视频过滤规则，以及补充的其它规则
 ad-edentw 合并自 Adblock Warning Removal List、ABP filters、anti-adblock-killer-filters
-
-- [EasyPrivacy](https://easylist.to/)
-
-https://easylist-downloads.adblockplus.org/easyprivacy.txt
-
-EasyList 的扩展规则，反隐私跟踪、挖矿规则
 
 - [HaGeZi's Blocklist](https://github.com/hagezi/dns-blocklists)
 
-推荐用 Pro 版本就可以。另外还有 HaGeZi's Xiaomi Tracker Blocklist
+推荐用 Pro 版本。PRO++可能会有误封，更激进的策略推荐在电脑端用浏览器插件，这样更方便解除误封。
+
+在Pro版本之外，再启用这三个列表：
+HaGeZi's Anti Piracy
+HaGeZi's Fake
+HaGeZi's Gambling
+另外还有 Xiaomi、OPPO、Huawei 等的 Tracker Blocklist
+
+- [Steven Black's List](https://github.com/StevenBlack/hosts)
+
+https://cdn.jsdelivr.net/gh/StevenBlack/hosts@master/hosts
 
 其他:
 
@@ -87,13 +97,13 @@ AdGuard 官方维护的广告规则，涵盖多种过滤规则
 
 - EasyList
 
-https://easylist-downloads.adblockplus.org/easylist.txt
+https://easylist.to/
 
 Adblock Plus 官方维护的广告规则
 
-EasyList China 是面向中文用户的 EasyList 扩展规则。EasyList 是主规则。
+[EasyList China](https://easylist-downloads.adblockplus.org/easylistchina.txt) 是面向中文用户的 EasyList 扩展规则。EasyList 是主规则。
 
-https://easylist-downloads.adblockplus.org/easylistchina.txt
+[EasyPrivacy](https://easylist-downloads.adblockplus.org/easyprivacy.txt) 是 EasyList 的扩展规则，反隐私跟踪、挖矿规则
 
 - 自定义过滤规则
 
@@ -107,7 +117,7 @@ AdGuard Home 的过滤规则兼容 Adblock 语法、Hosts 语法及 Domain-only 
 
 EDNS（扩展域名系统，Extension Mechanisms for DNS）本身并不设计用于增强隐私，它主要是在标准的DNS查询中添加一些额外的数据。
 
-特别是在使用 EDNS 客户端子网（EDNS Client Subnet，ECS）功能时。ECS会在DNS查询中附加用户的IP地址片段，向上游的DNS服务器暴露用户的大致地理位置。虽然这有助于返回离用户最近的数据中心的响应，提升速度，但它会在查询过程中暴露用户部分IP地址的前缀。部分DNS解析服务商考虑隐私直接选择不支持ECS。
+特别是在启用 EDNS 客户端子网（EDNS Client Subnet，ECS）功能后，ECS会在DNS查询中附加用户的IP地址片段，向上游的DNS服务器暴露用户的大致地理位置。虽然这有助于返回离用户最近的数据中心的响应，提升速度，但它会在查询过程中暴露用户部分IP地址的前缀。部分DNS解析服务商考虑隐私直接选择不支持ECS。
 
 速度限制 - `0`
 
