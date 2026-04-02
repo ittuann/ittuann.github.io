@@ -1,6 +1,6 @@
 ---
 layout: article
-title: 记录下DoH和ECH配置
+title: DoH和ECH配置
 date: 2022-05-10
 key: P2022-05-10
 tags: ["Other"]
@@ -167,6 +167,7 @@ AdGuardHome / NextDNS 可以配置 DoH
 
 <https://ipleak.net/>
 <https://dnsleaktest.com/>
+<https://dnsleaktest.org/dns-leak-test>
 <https://www.browserscan.net/>
 <https://browserleaks.com/ip>
 
