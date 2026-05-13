@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Minecraft Java开服记录
+title: Minecraft Java 开服记录
 date: 2024-10-15
 key: P2024-10-15
 tags: Other
@@ -15,7 +15,14 @@ Ubuntu 开 Fabric 服
 
 <!--more-->
 
-# 配置Java环境
+# Server 服务端
+
+1.14及以后版本由于Forge优化较差（主要体现在加载速度慢）及主流Mod开发者逐渐转移至Fabric，建议使用Fabric。
+
+- Fabric <https://fabricmc.net/use/server/>
+- 官方Java版本 <https://www.minecraft.net/zh-hans/download/server>
+
+## 配置Java环境
 
 - Java最低版本要求
 
@@ -45,21 +52,13 @@ java -version
 
 `headless`无头Java不会安装Java的图形界面GUI组件。
 
-# Server 服务端
-
-1.14及以后版本由于Forge优化较差（主要体现在加载速度慢）及主流Mod开发者逐渐转移至Fabric，建议使用Fabric。
-
-- Fabric <https://fabricmc.net/use/server/>
-- Forge <https://files.minecraftforge.net/>
-- 官方Java版本 <https://www.minecraft.net/zh-hans/download/server>
-
-# 端口
+## 端口
 
 ```
 sudo ufw allow 25565/tcp
 ```
 
-# 启动
+## 启动
 
 ```shell
 java -Xmx2G -Xms512M -jar fabric-server-mc.1.21.1-loader.0.16.7-launcher.1.0.1.jar nogui
@@ -83,15 +82,20 @@ java -Xmx2G -Xms512M -jar fabric-server-mc.1.21.1-loader.0.16.7-launcher.1.0.1.j
 ```
 online-mode=false # 关闭正版验证
 pvp=true   # PVP
-difficulty=easy  # 游戏难度。默认为easy，可选peaceful/easy/normal/hard
+difficulty=normal  # 游戏难度。默认为easy，可选peaceful/easy/normal/hard
 motd=\u00a7oittuann\u00a7r \u00a72Minecraft\u00a7r Server\u2764	# 服务器描述
 ```
 
-- 控制台命令：
+- 控制台常用命令记录：
 
 ```
 /op xxx    # 给xxx玩家op权限
 /deop xxx   # 去除xxx玩家op权限
+
+/tp <玩家名> <X Y Z 坐标>
+
+/locate biome minecraft:cherry_grove # 最近的樱花树林
+/seed         # 显示当前世界种子
 ```
 
 # Server-side Fabric mod
@@ -131,17 +135,7 @@ Mob:
 - FallingTree <https://modrinth.com/mod/fallingtree> 砍树
 - Carry On <https://modrinth.com/mod/carry-on> 搬运箱子
 
-# 其他
-
-- 常用控制台命令记录：
-
-```
-/locate biome minecraft:cherry_grove # 最近的樱花树林
-/tp <玩家名> <X Y Z 坐标>
-/seed         # 显示当前世界种子
-```
-
-## 客户端推荐mod
+# 客户端推荐mod
 
 - 信息类:
 

@@ -27,7 +27,6 @@ OpenWrt 软路由中 AdGuard Home 的 DNS 配置。
 https://dns.alidns.com/dns-query
 https://doh.pub/dns-query
 https://doh.360.cn
-https://dns.ipv6dns.com/dns-query
 # OpenClash
 # 127.0.0.1:7874
 ```
@@ -42,6 +41,16 @@ https://dns.ipv6dns.com/dns-query
 119.29.29.29
 2400:3200::1
 2402:4e00::
+```
+
+- 后备 DNS 服务器
+
+  当上游 DNS 服务器没有响应时使用的后备 DNS 服务器列表。
+
+```
+180.184.1.1
+180.76.76.76
+2400:da00::6666
 ```
 
 - 使用`最快的 IP 地址`
