@@ -15,9 +15,23 @@ aside:
 
 <!--more-->
 
-DoH 全称是 DNS-over-HTTPS，即使用 HTTPS 协议通过 443 端口进行 DNS 解析。主要用于防止 DNS 被监听和污染，从而增强互联网连接的隐私保护和安全性。
+## 介绍
 
-ECH 全称是 Encrypted Client Hello ，即 Secure SNI 安全加密扩展。主要用于防止 SNI (Server Name Indication) 被监听和篡改，从而增强网络流量的保护和安全性。
+- DoH, DNS-over-HTTPS
+
+DoH 使用 HTTPS 协议通过 443 端口进行 DNS 解析。它的主要作用是防止传统基于 UDP 明文传输的 DNS 被监听和篡改污染，从而增强隐私保护和安全性。
+
+DoH 是优秀且必要的技术。但 DoH 无法让用户在 ISP（互联网服务提供商）及第三方监听面前完全隐身，因为即使 DoH 加密了 DNS 请求，在建立 HTTPS 连接时的 SNI (Server Name Indication) 字段依然是明文传输的，这会暴露正在访问的域名。
+
+用 Wireshark 抓包看 SNI 字段，就能发现你的 ISP 仍然可以轻易看到你访问的每一个网站。
+
+- ECH, Encrypted Client Hello
+
+ECH (前身是 ESNI) 通过加密整个 Client Hello 握手信息，可以防止 SNI (Server Name Indication) 字段暴露，从而避免域名信息被监听。
+
+然而，目前并非所有网站都支持 ECH，甚至可以说绝大多数网站都尚未普及这一技术。
+
+总的来说，DoH 和 ECH 是增强隐私保护的利器，但还无法实现匿名。实现网络匿名依然需要 VPN。
 
 ## 配置 DoH 和 ECH
 
@@ -25,7 +39,7 @@ ECH 全称是 Encrypted Client Hello ，即 Secure SNI 安全加密扩展。主�
 
 测试DNS是否支持DoH:
 
-```
+```bash
 curl -H 'accept: application/dns-json' 'https://doh.pub/dns-query?name=baidu.com&type=A'
 curl -H 'accept: application/dns-json' 'https://doh.pub/dns-query?name=baidu.com&type=AAAA'
 ```
@@ -62,13 +76,13 @@ ServerAddress        AllowFallbackToUdp AutoUpgrade DohTemplate
 
 - 添加自定义DoH服务配置
 
-```
+```bash
 netsh dns add encryption server=[resolver-IP-address] dohtemplate=[resolver-DoH-template] autoupgrade=no udpfallback=no
 ```
 
 （PowerShell）
 
-```
+```ps1
 Add-DnsClientDohServerAddress -ServerAddress '<resolver-IP-address>' -DohTemplate '<resolver-DoH-template>' -AllowFallbackToUdp $False -AutoUpgrade $False
 ```
 
@@ -78,7 +92,7 @@ Add-DnsClientDohServerAddress -ServerAddress '<resolver-IP-address>' -DohTemplat
 
 用 netsh 举例 （添加的时候需要管理员权限
 
-```
+```bash
 # Alidns
 netsh dns add encryption server=223.5.5.5 dohtemplate=https://dns.alidns.com/dns-query autoupgrade=yes udpfallback=no
 netsh dns add encryption server=2400:3200::1 dohtemplate=https://dns.alidns.com/dns-query autoupgrade=yes udpfallback=no
@@ -114,13 +128,15 @@ netsh dns add encryption server=2001:de4::101 dohtemplate=https://dns.twnic.tw/d
 
 ### Android
 
-Android目前仅支持配置DoT，不支持配置DoH。系统是一加的Oxygen OS 11 (Android 11)
+Android目前仅支持配置 DoT，不支持配置 DoH。
+
+以一加的Oxygen OS 11 (Android 11) 系统为例：
 
 WLAN和互联网 - 私人DNS - 私人DNS提供商主机名称
 
 使用alidns的话填 `dns.alidns.com`
 
-### IOS
+### iOS
 
 通过添加配置描述文件的方式启用。
 
@@ -132,7 +148,7 @@ WLAN和互联网 - 私人DNS - 私人DNS提供商主机名称
 
 可能是因为UUID相同的原因导致配置文件不能共存
 
-IOS15 在 `设置 - 通用 - 设备管理 - DNS` 启用
+iOS 15 在 `设置 - 通用 - 设备管理 - DNS` 启用
 
 ### 路由器
 
@@ -161,15 +177,20 @@ AdGuardHome / NextDNS 可以配置 DoH
 - DNSSEC 测试
 
 <https://dnscheck.tools/>
+
 <https://wander.science/projects/dns/dnssec-resolver-test/>
 
 - DNS Leak 测试
 
 <https://ipleak.net/>
-<https://dnsleaktest.com/>
-<https://dnsleaktest.org/dns-leak-test>
-<https://www.browserscan.net/>
+
 <https://browserleaks.com/ip>
+
+<https://dnsleaktest.com/>
+
+<https://dnsleaktest.org/dns-leak-test>
+
+<https://www.browserscan.net/>
 
 WebRTC Leak Test: <https://browserleaks.com/webrtc>
 
